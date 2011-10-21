@@ -1,0 +1,15 @@
+package br.com.webb.model.item;
+
+public enum ItemStatus {
+	NEW,
+	WAITING_FOR_APPROVAL,
+	APPROVED,
+	REJECTED,
+	REQUESTED,
+	QUOTED,
+	ORDERED,
+	SUBMITED,
+	RECEIVED,
+	MISSCARRIED,
+	OUT_OF_STOCK
+}
