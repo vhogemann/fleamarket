@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"       
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="root" namespace="/" extends="struts-default">
+
+		<global-results>
+			<result name="home" type="freemarker">/WEB-INF/templates/home.ftl</result>
+			<result name="error" type="freemarker">/WEB-INF/templates/error.ftl</result>
+		</global-results>
+
+		<action name="home">
+			<result name="success" type="freemarker">/WEB-INF/templates/home.ftl</result>
+		</action>
+		
+		<action name="product/*" method="${1}">
+			<result name="success" type="freemarker">/WEB-INF/templates/product/${1}.ftl</result>
+		</action>
+		
+		<action name="product" class="productAction">
+			<result name="success" type="freemarker">/WEB-INF/templates/product/list.ftl</result>
+		</action>
+
+	</package>
+	
+</struts>
