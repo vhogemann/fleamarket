@@ -8,6 +8,6 @@
   <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory"/>
   <constant name="struts.custom.i18n.resources" value="com.hogemann.stamp.messages"/>
   
-  <include file="actions.xml"/>
+  <include file="struts/defaultMappings.xml"/>
   
 </struts>

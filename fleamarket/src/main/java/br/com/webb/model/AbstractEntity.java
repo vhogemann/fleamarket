@@ -3,7 +3,7 @@ package br.com.webb.model;
 import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class AbstractEntity implements Serializable {
+public abstract class AbstractEntity implements Serializable, Validatable {
 
 	private static final long serialVersionUID = 1L;
 	

@@ -14,9 +14,6 @@ public class Quote {
 	private Date createdAt;
 
 	@DBRef
-	private User createdBy;
-
-	@DBRef
 	private Supplier supplier;
 
 	@Transient
@@ -29,9 +26,8 @@ public class Quote {
 
 	public Quote() { }
 	
-	public Quote(User createdBy, Supplier supplier, BigDecimal price, Request request) {
+	public Quote(Supplier supplier, BigDecimal price, Request request) {
 		super();
-		this.createdBy = createdBy;
 		this.supplier = supplier;
 		this.price = price;
 		this.request = request;
@@ -46,14 +42,6 @@ public class Quote {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
-	}
-
-	public User getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(User createdBy) {
-		this.createdBy = createdBy;
 	}
 
 	public Supplier getSupplier() {

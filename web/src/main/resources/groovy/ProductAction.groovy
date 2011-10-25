@@ -10,13 +10,13 @@ class ProductAction {
 	@Autowire
 	ProductRepository productRepository
 	
-	def products
+	def entities
 	
 	Product product
 	
 	String execute(){
 		
-		this.products = productRepository.findAll()
+		entities = productRepository.findAll()
 		
 		"success"
 	}

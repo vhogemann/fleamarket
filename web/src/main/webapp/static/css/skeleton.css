@@ -1,0 +1,7 @@
+#container {min-width:100em;}
+#header {overflow:hidden; padding:5px 5px 0 5px;}
+#content {padding: 5px;}
+#area1 {width:17.5em; float:left; overflow:auto; margin-right: 5px; position:relative;}
+#area11 {width:13; float:left; padding:0 5px;}
+#area2 {position: relative;}
+/*#area2 *{position: static!important;}*/

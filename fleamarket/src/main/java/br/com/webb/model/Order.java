@@ -17,9 +17,6 @@ public class Order {
 	private BigDecimal total;
 	
 	@DBRef
-	private User owner;
-	
-	@DBRef
 	private Request request;
 	
 	private List<OrderItem> items;
@@ -42,14 +39,6 @@ public class Order {
 		return total;
 	}
 
-
-	public User getOwner() {
-		return owner;
-	}
-
-	public void setOwner(User owner) {
-		this.owner = owner;
-	}
 
 	public Request getRequest() {
 		return request;

@@ -1,0 +1,80 @@
+body {
+  font-family: Arial, Tahoma, Verdana, "Trebuchet MS", sans-serif !important;
+
+}
+.dashboard {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; FONT-FAMILY: Arial; TEXT-DECORATION: none;color:#31527B;line-height:20px !important;
+}
+.dashboard:link {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; FONT-FAMILY: Arial; TEXT-DECORATION: none;color:#31527B;line-height:20px !important;
+}
+.dashboard:active {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; FONT-FAMILY: Arial; TEXT-DECORATION: none;color:#31527B;line-height:20px !important;
+}
+.dashboard:visited {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; FONT-FAMILY: Arial; TEXT-DECORATION: none;color:#31527B;line-height:20px !important;
+}
+.dashboard:hover {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; FONT-FAMILY: Arial; TEXT-DECORATION: underline;color:#31527B;line-height:20px !important;
+}
+.x-form-label {
+  color: #31527B;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 0;
+}
+.webb-rfq-search-fields-panel-label,.webb-req-search-fields-panel-label,.x-form-label-right {
+  color: #31527B;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 0;
+  text-align: right;
+}
+.td02 {
+background:none repeat scroll 0 0 #325279;
+color:#FFFFFF !important;
+font-size:12px;
+font-weight:bold;
+}
+.x-edit-grid {
+border-color:-moz-use-text-color #D0D0D0 #D0D0D0 !important;
+border-style:none solid solid !important;
+border-width:0 1px 1px !important;
+overflow:hidden;
+}
+.x-form-text, textarea.x-form-field {
+  background: #FFFFFF url(../img/text-bg.gif) repeat-x scroll 0 0;
+  border-color: #d0d0d0;
+  color: #31527B;
+  font: 11px Arial, Tahoma, Verdana, "Trebuchet MS", sans-serif;
+  height: auto;
+  border:1px solid #B5B8C8;
+  padding:1px 3px;
+}
+.x-form-field-wrap .x-form-trigger {
+  background: url(../img/btn-sprite.gif) no-repeat 0 -168px !important;
+  border-bottom: 0;
+  height: 18px;
+  width: 13px;
+}
+.webb-form-combo-readonly img.x-form-trigger-arrow{
+  background-color: transparent;
+  border: 0;
+  background:transparent url(../img/icons-sprite.png) no-repeat 9999em 9999em !important;
+}
+.x-grid3-header {
+  background: #eff0f2 url(../img/grid3-hrow.gif) repeat-x scroll 0 bottom;
+}
+.x-grid3-hd-inner {
+  color: #424242;
+  font-weight: bold;
+}
+.x-grid3-cell-inner, .x-grid3-hd-inner {
+font-size:11px;
+line-height:13px;
+overflow:hidden;
+padding:3px 27px 3px 5px;
+white-space:nowrap;
+}
+.x-grid3-hd-row td, .x-grid3-row td, .x-grid3-summary-row td {
+font:11px arial,tahoma,helvetica,sans-serif;}

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="default" extends="attribute" namespace="">
+		
+		<action name="">
+			<result type="redirect-action">
+				<param name="namespace">/atributo</param>
+				<param name="actionName">list</param>
+			</result>
+		</action>
+		
+		<action name="*" class="baseAction">
+			<result type="freemarker">/WEB-INF/pages/{1}.ftl</result>
+		</action>
+
+		<action name="*/save" method="save" class="{1}Action">
+			<result type="redirect-action">
+				<param name="namespace">/{1}</param>
+				<param name="actionName">list</param>
+				<param name="entity">${entity}</param>
+				<param name="message">${message}</param>
+			</result>
+
+			<result name="input" type="freemarker">
+				/WEB-INF/pages/{1}/create.ftl
+			</result>
+		</action>
+
+		<action name="*/update" method="update" class="{1}Action">
+			<result type="redirect-action">
+				<param name="namespace">/{1}</param>
+				<param name="actionName">list</param>
+				<param name="entity">${entity}</param>
+				<param name="message">${message}</param>
+			</result>
+
+			<result name="input" type="freemarker">
+				/WEB-INF/pages/{1}/edit.ftl
+			</result>
+		</action>
+
+		<action name="*/delete" method="delete" class="{1}Action">
+			<result type="redirect-action">
+				<param name="namespace">/{1}</param>
+				<param name="actionName">list</param>
+				<param name="message">${message}</param>				
+			</result>
+		</action>
+	
+		<action name="ajax/*/*" method="{2}" class="{1}Action">
+			<result type="freemarker">
+				/WEB-INF/pages/{1}/{2}.ftl
+			</result>
+			<result name="input" type="freemarker">
+				/WEB-INF/pages/{1}/{2}Input.ftl
+			</result>
+		</action>
+
+		<action name="*/*" method="{2}" class="{1}Action">
+			<result type="freemarker">
+				/WEB-INF/pages/{1}/{2}.ftl
+			</result>
+			<result name="input" type="freemarker">
+				/WEB-INF/pages/{1}/{2}Input.ftl
+			</result>
+		</action>
+
+		<action name="ajax/*/*/*" method="{3}" class="{1}Action">
+			<param name="entity">{2}</param>
+			<result type="freemarker">
+				/WEB-INF/pages/{1}/{3}.ftl
+			</result>
+		</action>
+
+		<action name="*/*/*" method="{3}" class="{1}Action">
+			<param name="entity">{2}</param>
+			<result type="freemarker">
+				/WEB-INF/pages/{1}/{3}.ftl
+			</result>
+		</action>
+	</package>
+	
+</struts>

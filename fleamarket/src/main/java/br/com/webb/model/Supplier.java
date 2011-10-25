@@ -37,5 +37,10 @@ public class Supplier extends AbstractEntity {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
