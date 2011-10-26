@@ -20,8 +20,12 @@ public abstract class AbstractEntityAction <E extends AbstractEntity>{
 	private int currentPage;
 	private int pageSize = 10;
 	
-	public abstract MongoRepository<E, String> getRepository();
-
+	private MongoRepository<E, String> repository;
+	
+	public String execute(){
+		return SUCCESS;
+	}
+	
 	public String show(){
 		if(isNotBlank(entityId))
 			entity = getRepository().findOne(entityId);
@@ -117,6 +121,14 @@ public abstract class AbstractEntityAction <E extends AbstractEntity>{
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public MongoRepository<E, String> getRepository() {
+		return repository;
+	}
+
+	public void setRepository(MongoRepository<E, String> repository) {
+		this.repository = repository;
 	}
 
 }

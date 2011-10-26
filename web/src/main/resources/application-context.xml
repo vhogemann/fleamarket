@@ -18,6 +18,7 @@
 	<import resource="classpath*:data-context.xml"/>
 	
 	<lang:groovy id="productAction" script-source="classpath:groovy/ProductAction.groovy" scope="prototype">
+		<lang:property name="repository" ref="productRepository"/>
 	</lang:groovy>
 	
 </beans>
