@@ -1,8 +1,11 @@
 package br.com.webb.model.order;
 
 import java.util.Date;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class RequestHistoryItem {
+import br.com.webb.model.Validatable;
+
+public class RequestHistoryItem implements Validatable {
 
 	private Date createdAt;
 	
@@ -16,6 +19,10 @@ public class RequestHistoryItem {
 		this.status = status;
 		this.description = description;
 		this.createdAt = new Date();
+	}
+	
+	public boolean isValid() {
+		return isNotBlank(description) && status != null;
 	}
 
 	public Date getCreatedAt() {
@@ -41,5 +48,5 @@ public class RequestHistoryItem {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 }

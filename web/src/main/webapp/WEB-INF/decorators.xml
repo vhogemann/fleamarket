@@ -8,5 +8,5 @@
 	</decorator>
 	<decorator name="simple" page="simple.ftl">
 		<pattern>/login</pattern>
-		</decorator>
+	</decorator>
 </decorators>

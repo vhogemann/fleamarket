@@ -14,7 +14,7 @@ class ProductAction {
 	
 	Product product
 	
-	String execute(){
+	String list(){
 		
 		entities = productRepository.findAll()
 		

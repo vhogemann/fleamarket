@@ -14,14 +14,10 @@
 			<result name="success" type="freemarker">/WEB-INF/templates/home.ftl</result>
 		</action>
 		
-		<action name="product/*" method="${1}">
-			<result name="success" type="freemarker">/WEB-INF/templates/product/${1}.ftl</result>
+		<action name="*/*" method="{2}" class="{1}Action">
+			<result name="success" type="freemarker">/WEB-INF/pages/product/{2}.ftl</result>
 		</action>
 		
-		<action name="product" class="productAction">
-			<result name="success" type="freemarker">/WEB-INF/templates/product/list.ftl</result>
-		</action>
-
 	</package>
 	
 </struts>

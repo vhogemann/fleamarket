@@ -2,16 +2,20 @@ package br.com.webb.model.item;
 
 import java.math.BigDecimal;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
-
-import br.com.webb.model.Supplier;
+import br.com.webb.model.Product;
 
 public class QuoteItem extends AbstractItem {
 	
 	private BigDecimal pricePerItem;
 	
-	@DBRef
-	private Supplier supplier;
+	public QuoteItem() {}
+	
+	
+	public QuoteItem(Product product, int quantity, BigDecimal pricePerItem) {
+		this.pricePerItem = pricePerItem;
+		setProduct(product);
+		setQuantity(quantity);
+	}
 
 	public BigDecimal getPricePerItem() {
 		return pricePerItem;
@@ -21,12 +25,5 @@ public class QuoteItem extends AbstractItem {
 		this.pricePerItem = pricePerItem;
 	}
 
-	public Supplier getSupplier() {
-		return supplier;
-	}
-
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
-	}
 
 }

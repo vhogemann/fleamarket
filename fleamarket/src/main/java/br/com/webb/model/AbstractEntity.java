@@ -27,4 +27,13 @@ public abstract class AbstractEntity implements Serializable, Validatable {
 		this.objectId = objectId;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(obj instanceof AbstractEntity)
+			return objectId.equals(((AbstractEntity) obj).getObjectId());
+		
+		return false;
+	}
+	
 }

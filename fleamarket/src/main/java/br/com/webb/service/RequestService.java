@@ -13,6 +13,6 @@ public interface RequestService {
 	
 	public Request placeQuote(Request request, Quote quote);
 	
-	public List<Request> listRequests(RequestStatus status, int offser, int limit);
+	public List<Request> list(RequestStatus status, int offser, int limit);
 
 }

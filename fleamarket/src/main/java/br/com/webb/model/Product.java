@@ -1,5 +1,6 @@
 package br.com.webb.model;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,11 +14,14 @@ public class Product extends AbstractEntity{
 
 	private String description;
 	private String name;
+	private BigDecimal referencePrice;
+	private String imageURL;
 	private Set<String> tags;
 	
 	public Product() {}
 	
-	public Product(String name, String description) {
+	public Product(String name, String description, BigDecimal referencePrice) {
+		this.referencePrice = referencePrice;
 		this.name = name;
 		this.description = description;
 		if(!isValid())
@@ -25,7 +29,7 @@ public class Product extends AbstractEntity{
 	}
 	
 	public boolean isValid() {
-		return isNotBlank(name) && isNotBlank(description);
+		return isNotBlank(name) && isNotBlank(description) && referencePrice != null;
 	}
 
 	public String getDescription() {
@@ -50,6 +54,22 @@ public class Product extends AbstractEntity{
 
 	public void setTags(Set<String> tags) {
 		this.tags = tags;
+	}
+
+	public BigDecimal getReferencePrice() {
+		return referencePrice;
+	}
+
+	public void setReferencePrice(BigDecimal referencePrice) {
+		this.referencePrice = referencePrice;
+	}
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 
 }

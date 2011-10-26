@@ -1,0 +1,8 @@
+<config>
+	<context-values>
+	</context-values>
+	<macro-library>
+		<entry namespace="crud" path="src/main/webapp/WEB-INF/macros/crud.ftl" project="web" type="file"/>
+		<entry namespace="util" path="src/main/webapp/WEB-INF/macros/general-utils.ftl" project="web" type="file"/>
+	</macro-library>
+</config>

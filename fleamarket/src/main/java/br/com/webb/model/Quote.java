@@ -26,15 +26,11 @@ public class Quote {
 
 	public Quote() { }
 	
-	public Quote(Supplier supplier, BigDecimal price, Request request) {
-		super();
+	public Quote(Supplier supplier, Request request) {
 		this.supplier = supplier;
-		this.price = price;
 		this.request = request;
 		this.createdAt = new Date();
 	}
-
-
 
 	public Date getCreatedAt() {
 		return createdAt;

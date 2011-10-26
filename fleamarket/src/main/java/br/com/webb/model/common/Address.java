@@ -1,6 +1,9 @@
 package br.com.webb.model.common;
 
-public class Address {
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import br.com.webb.model.Validatable;
+
+public class Address implements Validatable {
 
 	private String streetName;
 	private String number;
@@ -12,14 +15,16 @@ public class Address {
 	private String city;
 	
 	private AddressType type;
-
 	
-	
-	
-	public Address(String streetName, String number, String complement,
-			String postalCode, String country, String state, String city,
+	public Address(
+			String streetName,
+			String number,
+			String complement,
+			String postalCode,
+			String country,
+			String state,
+			String city,
 			AddressType type) {
-		super();
 		this.streetName = streetName;
 		this.number = number;
 		this.complement = complement;
@@ -28,6 +33,15 @@ public class Address {
 		this.state = state;
 		this.city = city;
 		this.type = type;
+	}
+	
+	public boolean isValid() {
+		return isNotBlank(streetName) &&
+			isNotBlank(number) &&
+			isNotBlank(postalCode) &&
+			isNotBlank(country) &&
+			isNotBlank(city) &&
+			isNotBlank(state);
 	}
 
 	public String getStreetName() {
@@ -93,5 +107,5 @@ public class Address {
 	public void setType(AddressType type) {
 		this.type = type;
 	}
-	
+
 }

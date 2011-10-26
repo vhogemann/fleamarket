@@ -10,7 +10,9 @@
 		http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository-1.0.xsd">
 	
 	<mongo:repositories base-package="br.com.webb.repository">
+		<mongo:repository id="orderRepository"/>
 		<mongo:repository id="productRepository"/>
+		<mongo:repository id="requestRepository"/>
 		<mongo:repository id="supplierRepository"/>
 	</mongo:repositories>
 	
