@@ -29,7 +29,7 @@ public class Request extends AbstractEntity {
 	private List<RequestItem> items;
 
 	@DBRef
-	private List<Order> orders;
+	private Order order;
 
 	@DBRef
 	private List<Quote> quotes;
@@ -38,24 +38,50 @@ public class Request extends AbstractEntity {
 
 	public Request() { }
 	
-	
-	
 	public Request(Address deliveryAddress, String description) {
 		this.deliveryAddress = deliveryAddress;
 		this.description = description;
 		this.createdAt = new Date();
 		setStatus(new RequestHistoryItem(RequestStatus.DRAFT, "Nova requisição"));
-		
 		if(!isValid())
 			throw new IllegalStateException("Valid Address and description are required");
-		
 	}
-
-
 
 	public boolean isValid() {
 		return isNotBlank(description) && deliveryAddress != null && deliveryAddress.isValid();
 	}
+	
+	public void addQuote(Quote quote){
+		if ( getItems().containsAll(quote.getItems()) &&
+				getItems().size() == quote.getItems().size()){
+			getQuotes().add(quote);
+		} else
+			throw new IllegalArgumentException("Quote must match every item described in the Request");
+	}
+	
+	public void setOrder(Order order) {
+		boolean valid = this.order == null &&
+			status.getStatus().canChangeTo(RequestStatus.ORDERED) &&
+			items.containsAll(order.getItems());
+		
+		if(valid) {
+			this.order = order;
+			setStatus(new RequestHistoryItem(RequestStatus.ORDERED, "Order placed"));
+		} else
+			throw new IllegalArgumentException("Order not placed, check Request and Order");
+	}
+	
+	public void setStatus(RequestHistoryItem status) {
+		if(this.status == null)
+			this.status = status;
+		else if (this.status.getStatus().canChangeTo(status.getStatus())){
+			this.status = status;
+			getHistory().add(status);
+		} else
+			throw new IllegalArgumentException("Invalid Status change");
+	}
+	
+	// G&S -----------------------------------
 	
 	public Date getCreatedAt() {
 		return createdAt;
@@ -81,10 +107,8 @@ public class Request extends AbstractEntity {
 		return items;
 	}
 
-	public List<Order> getOrders() {
-		if(orders == null)
-			orders = new ArrayList<Order>();
-		return orders;
+	public Order getOrder() {
+		return order;
 	}
 
 	public List<Quote> getQuotes() {
@@ -117,22 +141,9 @@ public class Request extends AbstractEntity {
 		this.items = items;
 	}
 	
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
 	
 	public void setQuotes(List<Quote> quotes) {
 		this.quotes = quotes;
-	}
-
-	public void setStatus(RequestHistoryItem status) {
-		if(this.status == null)
-			this.status = status;
-		else if (this.status.getStatus().canChangeTo(status.getStatus())){
-			this.status = status;
-			getHistory().add(status);
-		} else
-			throw new IllegalArgumentException("Invalid Status change");
 	}
 
 }

@@ -2,28 +2,24 @@ package br.com.webb.model.item;
 
 import java.math.BigDecimal;
 
-import br.com.webb.model.Product;
-
 public class QuoteItem extends AbstractItem {
 	
-	private BigDecimal pricePerItem;
+	private BigDecimal price;
 	
 	public QuoteItem() {}
 	
-	
-	public QuoteItem(Product product, int quantity, BigDecimal pricePerItem) {
-		this.pricePerItem = pricePerItem;
-		setProduct(product);
-		setQuantity(quantity);
+	public QuoteItem(RequestItem item, BigDecimal pricePerItem){
+		setProduct(item.getProduct());
+		setQuantity(item.getQuantity());
+		this.price = pricePerItem;
 	}
 
-	public BigDecimal getPricePerItem() {
-		return pricePerItem;
+	public BigDecimal getPrice() {
+		return price;
 	}
 
-	public void setPricePerItem(BigDecimal pricePerItem) {
-		this.pricePerItem = pricePerItem;
+	public void setPrice(BigDecimal pricePerItem) {
+		this.price = pricePerItem;
 	}
-
 
 }

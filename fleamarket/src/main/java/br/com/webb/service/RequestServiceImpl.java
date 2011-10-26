@@ -2,24 +2,28 @@ package br.com.webb.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.webb.model.Quote;
 import br.com.webb.model.Request;
-import br.com.webb.model.item.RequestItem;
 import br.com.webb.model.order.RequestStatus;
+import br.com.webb.repository.RequestRepository;
 
 @Service
 public class RequestServiceImpl implements RequestService {
-
 	
-	public Request placeRequest(List<RequestItem> items, String description) {
-		// TODO Auto-generated method stub
-		return null;
+	@Autowired
+	private RequestRepository repository;
+	
+	public Request placeRequest(Request request) {
+		if(request.isValid())
+			return repository.save(request);
+		
+		throw new IllegalArgumentException("request must be a valid non-null object");
 	}
 
-	public Request placeQuote(Request request, Quote quote) {
-		// TODO Auto-generated method stub
+	public Request placeQuote(String requestId, Quote quote) {
 		return null;
 	}
 

@@ -52,6 +52,16 @@ public class RequestTest {
 	}
 	
 	@Test
+	public void addQuoteTest(){
+		
+	}
+	
+	@Test
+	public void setOrderTest(){
+		
+	}
+	
+	@Test
 	public void invalidStatusChangeTest(){
 		Address address = new Address("Rua da Assembleia", "98", null, "20011-000", "Brasil", "RJ", "Rio de Janeiro", AddressType.COMMERCIAL);
 		Request request = new Request(address,"Teste Unitário");

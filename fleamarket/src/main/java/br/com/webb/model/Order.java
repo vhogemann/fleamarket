@@ -3,24 +3,31 @@ package br.com.webb.model;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import br.com.webb.model.item.OrderItem;
+
+import br.com.webb.model.item.QuoteItem;
+import br.com.webb.model.order.OrderHistoryItem;
 
 @Document
 public class Order {
 	
 	private String id;
 	
-	@Transient
-	private BigDecimal total;
+	private List<QuoteItem> items;
 	
-	@DBRef
-	private Request request;
+	private OrderHistoryItem status;
 	
-	private List<OrderItem> items;
-
+	private List<OrderHistoryItem> history;
+	
+	public Order() { }
+	
+	public Order(Quote quote){
+		if(!quote.isValid())
+			throw new IllegalArgumentException("Can't create Order from an invalid Quote");
+		
+		this.items = quote.getItems();
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -30,30 +37,35 @@ public class Order {
 	}
 
 	public BigDecimal getTotal() {
-		if(total == null){
-			total = new BigDecimal(0d);
-			if(items != null && !items.isEmpty())
-				for(OrderItem item : items)
-					total = total.add(item.getPrice());
-		}
+		BigDecimal total = new BigDecimal(0d);
+		if(items != null && !items.isEmpty())
+			for(QuoteItem item : items)
+				total = total.add(item.getPrice());
 		return total;
 	}
 
-
-	public Request getRequest() {
-		return request;
-	}
-
-	public void setRequest(Request request) {
-		this.request = request;
-	}
-
-	public List<OrderItem> getItems() {
+	public List<QuoteItem> getItems() {
 		return items;
 	}
 
-	public void setItems(List<OrderItem> items) {
+	public void setItems(List<QuoteItem> items) {
 		this.items = items;
+	}
+
+	public OrderHistoryItem getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderHistoryItem status) {
+		this.status = status;
+	}
+
+	public List<OrderHistoryItem> getHistory() {
+		return history;
+	}
+
+	public void setHistory(List<OrderHistoryItem> history) {
+		this.history = history;
 	}
 	
 }
