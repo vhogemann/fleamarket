@@ -4,33 +4,15 @@ import org.springframework.beans.factory.annotation.Autowire
 
 import br.com.webb.model.Product
 import br.com.webb.repository.ProductRepository
+import br.com.webb.web.action.AbstractEntityAction;
 
-class ProductAction {
+class ProductAction extends AbstractEntityAction<Product> {
 
 	@Autowire
-	ProductRepository productRepository
+	ProductRepository repository
 	
-	def entities
-	
-	Product product
-	
-	String list(){
-		
-		entities = productRepository.findAll()
-		
-		"success"
-	}
-	
-	String create(){
-		"success"
-	}
-	
-	String update(){
-		"success"
-	}
-	
-	String delete(){
-		"success"
+	Product newEntity(){
+		new Product();
 	}
 	
 }
