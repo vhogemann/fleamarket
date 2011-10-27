@@ -1,27 +1,45 @@
 package br.com.webb.model.order;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Date;
 
-public enum OrderStatus {
-	
-	CANCELED,
-	RETURNED,
-	MISSCARRIED,
-	RECEIVED(RETURNED),
-	SUBMITED(RECEIVED,MISSCARRIED),
-	WAITING_FOR_SUPPLIER(SUBMITED,CANCELED),
-	WAITING_PAYMENT(SUBMITED,WAITING_FOR_SUPPLIER,CANCELED),
-	NEW(WAITING_PAYMENT,CANCELED);
-	
-	private List<OrderStatus> valid;
-	
-	private OrderStatus(OrderStatus ... valid) {
-		this.valid = Arrays.asList(valid);
-	}
-	
-	public boolean canChangeTo(OrderStatus status){
-		return valid.contains(status);
+public class OrderStatus {
+
+	private Date createdAt;
+
+	private OrderState status;
+
+	private String description;
+
+	public OrderStatus() {}
+
+	public OrderStatus(OrderState status, String description) {
+		super();
+		this.status = status;
+		this.description = description;
+		this.createdAt = new Date();
 	}
 
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public OrderState getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderState status) {
+		this.status = status;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

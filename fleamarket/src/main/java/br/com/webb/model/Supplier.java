@@ -1,7 +1,10 @@
 package br.com.webb.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import br.com.webb.model.common.Address;
 
+@Document
 public class Supplier extends AbstractEntity {
 	
 	

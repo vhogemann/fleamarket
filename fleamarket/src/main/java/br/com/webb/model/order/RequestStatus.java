@@ -1,27 +1,52 @@
 package br.com.webb.model.order;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Date;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public enum RequestStatus {
+import br.com.webb.model.Validatable;
+
+public class RequestStatus implements Validatable {
+
+	private Date createdAt;
 	
-	CLOSED(),
-	ORDERED(CLOSED),
-	PENDING_ORDERS(ORDERED,CLOSED),
-	PENDING_QUOTES(PENDING_ORDERS,CLOSED),
-	DENIED(),
-	APPROVED(PENDING_QUOTES, CLOSED),
-	WAITING_FOR_APPROVAL( APPROVED, DENIED, CLOSED ),
-	DRAFT( WAITING_FOR_APPROVAL, CLOSED );
+	private RequestState state;
 	
-	private List<RequestStatus> valid;
+	private String description;
+
+	public RequestStatus() { }
 	
-	private RequestStatus(RequestStatus ... valid ) {
-		this.valid = Arrays.asList(valid);
+	public RequestStatus(RequestState status, String description) {
+		this.state = status;
+		this.description = description;
+		this.createdAt = new Date();
 	}
 	
-	public boolean canChangeTo(RequestStatus status){
-		return valid.contains(status);
+	public boolean isValid() {
+		return isNotBlank(description) && state != null;
 	}
-	
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public RequestState getState() {
+		return state;
+	}
+
+	public void setState(RequestState status) {
+		this.state = status;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }

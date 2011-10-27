@@ -1,37 +1,50 @@
 package br.com.webb.model.item;
 
-import java.math.BigDecimal;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-public class RequestItem extends AbstractItem {
+import br.com.webb.model.Product;
+
+public class RequestItem implements Item {
 	
-	private BigDecimal maximumPrice;
+	@DBRef
+	private Product product;
 	
-	private boolean required;
+	private int quantity;
 	
-	private String description;
+	public RequestItem() {}
 
-	public BigDecimal getMaximumPrice() {
-		return maximumPrice;
+	public RequestItem(Product product, int quantity) {
+		if(product.isValid()){
+			this.product = product;
+			this.quantity = quantity;
+		} else 
+			throw new IllegalArgumentException("Can't create Item from an invalid Product");
 	}
 
-	public void setMaximumPrice(BigDecimal maximumPrice) {
-		this.maximumPrice = maximumPrice;
+	public Product getProduct() {
+		return product;
 	}
 
-	public boolean isRequired() {
-		return required;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public void setRequired(boolean required) {
-		this.required = required;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public String getDescription() {
-		return description;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Item){
+			Product product = ((Item)obj).getProduct();
+			int quantity = ((Item)obj).getQuantity();
+			return this.product.equals(product) && this.quantity == quantity; 
+		}
+		return false;
 	}
 	
 }

@@ -2,22 +2,20 @@ package br.com.webb.model;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.Set;
 
 import br.com.webb.model.item.QuoteItem;
-import br.com.webb.model.order.OrderHistoryItem;
+import br.com.webb.model.order.OrderStatus;
 
-@Document
 public class Order {
 	
 	private String id;
 	
-	private List<QuoteItem> items;
+	private Set<QuoteItem> items;
 	
-	private OrderHistoryItem status;
+	private OrderStatus status;
 	
-	private List<OrderHistoryItem> history;
+	private List<OrderStatus> history;
 	
 	public Order() { }
 	
@@ -44,27 +42,27 @@ public class Order {
 		return total;
 	}
 
-	public List<QuoteItem> getItems() {
+	public Set<QuoteItem> getItems() {
 		return items;
 	}
 
-	public void setItems(List<QuoteItem> items) {
+	public void setItems(Set<QuoteItem> items) {
 		this.items = items;
 	}
 
-	public OrderHistoryItem getStatus() {
+	public OrderStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(OrderHistoryItem status) {
+	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
 
-	public List<OrderHistoryItem> getHistory() {
+	public List<OrderStatus> getHistory() {
 		return history;
 	}
 
-	public void setHistory(List<OrderHistoryItem> history) {
+	public void setHistory(List<OrderStatus> history) {
 		this.history = history;
 	}
 	

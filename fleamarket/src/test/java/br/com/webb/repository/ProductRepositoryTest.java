@@ -26,5 +26,8 @@ public class ProductRepositoryTest extends AbstractMongoRepositoryTest<Product> 
 	public MongoRepository<Product, String> getRepository() {
 		return productRepository;
 	}
+
+	@Override
+	public void afterResetHook(){}
 	
 }

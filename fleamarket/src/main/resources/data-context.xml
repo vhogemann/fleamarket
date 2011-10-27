@@ -10,14 +10,10 @@
 		http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository-1.0.xsd">
 	
 	<mongo:repositories base-package="br.com.webb.repository">
-		<mongo:repository id="orderRepository"/>
-		<mongo:repository id="productRepository"/>
-		<mongo:repository id="requestRepository"/>
-		<mongo:repository id="supplierRepository"/>
 	</mongo:repositories>
 	
-	<mongo:mongo host="${mongo.host}" port="${mongo.port}"></mongo:mongo>
-	<mongo:db-factory/>
+	<mongo:mongo host="${mongo.host}" port="${mongo.port}"/>
+	<mongo:db-factory dbname="${mongo.db.name}"/>
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
 		<property name="writeResultChecking" value="LOG"/>

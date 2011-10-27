@@ -3,12 +3,12 @@ package br.com.webb.service;
 import java.util.List;
 
 import br.com.webb.model.Request;
-import br.com.webb.model.order.RequestStatus;
+import br.com.webb.model.order.RequestState;
 
 public interface RequestService {
 	
 	public Request placeRequest(Request request);
 	
-	public List<Request> list(RequestStatus status, int offser, int limit);
+	public List<Request> list(RequestState status, int offser, int limit);
 
 }
