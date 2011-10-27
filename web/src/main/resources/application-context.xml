@@ -70,5 +70,10 @@
 		<lang:property name="staticURLBase" value="${staticURLBase}"></lang:property>
 	</lang:groovy>
 	
+	<lang:groovy id="requestAction" script-source="classpath:groovy/RequestAction.groovy" scope="prototype">
+		<lang:property name="repository" ref="requestRepository"/>
+		<lang:property name="staticURLBase" value="${staticURLBase}"></lang:property>
+	</lang:groovy>
+	
 	
 </beans>

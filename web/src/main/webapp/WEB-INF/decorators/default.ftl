@@ -74,11 +74,10 @@
 							-->
 						</div>
 						<div class="line2">
-						<#--
 							<ul class="menu1">
-								<li class="menu drop" id="atributosSubMenu"><a href="#"><span>Atributos</span></a></li>
+								<li class="menu drop" id="produtosSubMenu"><a href="<@s.url action="product/list" />"><span><@s.text name="Produtos" /></span></a></li>
 							</ul>
-						-->
+						
 						</div>
 						<div class="line3">
 						<#--

@@ -4,14 +4,13 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 import br.com.webb.model.AbstractEntity;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 public abstract class AbstractEntityAction <E extends AbstractEntity> extends ActionSupport{
 
@@ -20,8 +19,7 @@ public abstract class AbstractEntityAction <E extends AbstractEntity> extends Ac
 	protected static final String SUCCESS = "success";
 
 	protected String entityId;
-	//protected E entity;
-	protected Page<E> page;
+	protected List<E> entities;
 	
 	private int currentPage;
 	private int pageSize = 10;
@@ -49,7 +47,7 @@ public abstract class AbstractEntityAction <E extends AbstractEntity> extends Ac
 	}
 	
 	public String list(){
-		page = getRepository().findAll(new PageRequest(currentPage, pageSize));
+		entities = getRepository().findAll();
 		return SUCCESS;
 	}
 	
@@ -81,6 +79,27 @@ public abstract class AbstractEntityAction <E extends AbstractEntity> extends Ac
 		
 	}
 	
+	public String update(){
+		
+		if(entity.isValid()){
+			getRepository().save(entity);
+			return SUCCESS;
+		} 
+		Collection<String> errorMessages = new ArrayList<String>();
+		errorMessages.add("Entity is not Valid!");
+		this.setActionErrors(errorMessages );
+		return INPUT;
+	}
+	
+	public String delete(){
+		
+		getRepository().delete(entity);
+		
+		return SUCCESS;
+	}
+	
+	
+	
 	/**
 	 * This method should return a blank entity
 	 * ready to be populated by the user using
@@ -98,15 +117,6 @@ public abstract class AbstractEntityAction <E extends AbstractEntity> extends Ac
 		this.entityId = entityId;
 	}
 
-	
-	public Page<E> getPage() {
-		return page;
-	}
-
-
-	public void setPage(Page<E> page) {
-		this.page = page;
-	}
 
 
 	public int getCurrentPage() {
@@ -140,6 +150,14 @@ public abstract class AbstractEntityAction <E extends AbstractEntity> extends Ac
 
 	public void setStaticURLBase(String staticURLBase) {
 		this.staticURLBase = staticURLBase;
+	}
+
+	public List<E> getEntities() {
+		return entities;
+	}
+
+	public void setEntities(List<E> entities) {
+		this.entities = entities;
 	}
 
 }
