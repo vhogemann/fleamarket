@@ -1,19 +1,16 @@
 package br.com.webb.model.item;
 
-import java.util.List;
-
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import br.com.webb.model.Product;
 
-public class AbstractItem {
+public class AbstractItem implements Item {
 	
 	@DBRef
 	private Product product;
 	
 	private int quantity;
 	
-	private List<ItemHistory> history;
 
 	public Product getProduct() {
 		return product;
@@ -30,13 +27,14 @@ public class AbstractItem {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-	public List<ItemHistory> getHistory() {
-		return history;
-	}
-
-	public void setHistory(List<ItemHistory> history) {
-		this.history = history;
-	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Item){
+			Product product = ((Item)obj).getProduct();
+			int quantity = ((Item)obj).getQuantity();
+			return this.product.equals(product) && this.quantity == quantity; 
+		}
+		return false;
+	}
 }
