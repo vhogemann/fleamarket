@@ -13,12 +13,62 @@
 	<context:annotation-config/>
 	<context:component-scan base-package="br.com.webb"/>
 	
-	<context:property-placeholder location="classpath*:console.properties"/>
+	<context:property-placeholder location="classpath*:fleamarket.properties"/>
 	
 	<import resource="classpath*:data-context.xml"/>
 	
+	<bean name="strutsPrepareFilter"
+		class="com.ideais.utils.web.URIBasedSwitchFilter">
+		<property name="exclusions">
+			<list>
+				<bean class="com.ideais.utils.PatternFactoryBean">
+					<property name="regex"
+						value="^(/fleamarket-web)?/service/.*$" />
+				</bean>
+				<bean class="com.ideais.utils.PatternFactoryBean">
+					<property name="regex"
+						value="^(/fleamarket-web)?/static/.*$" />
+				</bean>
+				<bean class="com.ideais.utils.PatternFactoryBean">
+					<property name="regex"
+						value="^(/fleamarket-web)?/favicon.ico$" />
+				</bean>
+			</list>
+		</property>
+		<property name="defaultFilter">
+			<bean
+				class="org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter" />
+		</property>
+	</bean>
+	
+	<bean name="strutsExecuteFilter"
+		class="com.ideais.utils.web.URIBasedSwitchFilter">
+		<property name="exclusions">
+			<list>
+				<bean class="com.ideais.utils.PatternFactoryBean">
+					<property name="regex"
+						value="^(/fleamarket-web)?/service/.*$" />
+				</bean>
+				<bean class="com.ideais.utils.PatternFactoryBean">
+					<property name="regex"
+						value="^(/fleamarket-web)?/static/.*$" />
+				</bean>
+				<bean class="com.ideais.utils.PatternFactoryBean">
+					<property name="regex"
+						value="^(/fleamarket-web)?/favicon.ico$" />
+				</bean>
+			</list>
+		</property>
+		<property name="defaultFilter">
+			<bean
+				class="org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter" />
+		</property>
+	</bean>
+	
 	<lang:groovy id="productAction" script-source="classpath:groovy/ProductAction.groovy" scope="prototype">
 		<lang:property name="repository" ref="productRepository"/>
+		<lang:property name="staticURLBase" value="${staticURLBase}"></lang:property>
 	</lang:groovy>
+	
 	
 </beans>

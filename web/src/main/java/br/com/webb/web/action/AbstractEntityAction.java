@@ -2,25 +2,36 @@ package br.com.webb.web.action;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import com.opensymphony.xwork2.ActionSupport;
+
 import br.com.webb.model.AbstractEntity;
 
-public abstract class AbstractEntityAction <E extends AbstractEntity>{
+public abstract class AbstractEntityAction <E extends AbstractEntity> extends ActionSupport{
 
+	private static final long serialVersionUID = 8466293955457016376L;
 	protected static final String FAILURE = "failure";
 	protected static final String SUCCESS = "success";
 
 	protected String entityId;
-	protected E entity;
+	//protected E entity;
 	protected Page<E> page;
 	
 	private int currentPage;
 	private int pageSize = 10;
-	
+		
 	private MongoRepository<E, String> repository;
+	
+	private String staticURLBase;
+	
+	protected E entity;
+	
 	
 	public String execute(){
 		return SUCCESS;
@@ -43,14 +54,14 @@ public abstract class AbstractEntityAction <E extends AbstractEntity>{
 	}
 	
 	public String create(){
-		entity = newEntity();
+		entity =  newEntity();
 		return SUCCESS;
 	}
 	
 	public String edit(){
 		if(isNotBlank(entityId))
 			entity = getRepository().findOne(entityId);
-
+			
 		if(entity != null)
 			return SUCCESS;
 		
@@ -63,8 +74,10 @@ public abstract class AbstractEntityAction <E extends AbstractEntity>{
 			getRepository().save(entity);
 			return SUCCESS;
 		} 
-		
-		return FAILURE;
+		Collection<String> errorMessages = new ArrayList<String>();
+		errorMessages.add("Entity is not Valid!");
+		this.setActionErrors(errorMessages );
+		return INPUT;
 		
 	}
 	
@@ -85,17 +98,7 @@ public abstract class AbstractEntityAction <E extends AbstractEntity>{
 		this.entityId = entityId;
 	}
 
-
-	public E getEntity() {
-		return entity;
-	}
-
-
-	public void setEntity(E entity) {
-		this.entity = entity;
-	}
-
-
+	
 	public Page<E> getPage() {
 		return page;
 	}
@@ -129,6 +132,14 @@ public abstract class AbstractEntityAction <E extends AbstractEntity>{
 
 	public void setRepository(MongoRepository<E, String> repository) {
 		this.repository = repository;
+	}
+
+	public String getStaticURLBase() {
+		return staticURLBase;
+	}
+
+	public void setStaticURLBase(String staticURLBase) {
+		this.staticURLBase = staticURLBase;
 	}
 
 }

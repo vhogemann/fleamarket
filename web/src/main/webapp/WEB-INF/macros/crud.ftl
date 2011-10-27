@@ -34,7 +34,7 @@
 						</#list>
 					</div>
 				</#if>
-				<#if entities?has_content>
+				<#if page.getContent()?has_content>
 		        	<table class="table1 datatable">
 						<thead>
 							<tr>
@@ -47,7 +47,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<#list entities as entity>
+							<#list page.getContent() as entity>
 								<tr>
 									<#list columns as col>
 										<td>
@@ -82,6 +82,9 @@
     </head>
     <body>
     	<#assign operation><#if isNew>save<#else>update</#if></#assign>
+    	<#if action.hasActionErrors()>
+			<div class="error"><@s.text name="${action.getActionErrors()}" /></div>
+		</#if>
 		<@s.form id="${type}_${operation}" action="${type}/${operation}">
 			<h1 class="formTitle"><@s.text name=title /></h1>
 			<#if !isNew><@s.hidden name="entity" /></#if>

@@ -3,7 +3,7 @@
           "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"       
           "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-  
+  <!-- 
   <constant name="struts.devMode" value="true"/>
   <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
   <constant name="struts.enable.SlashesInActionNames" value="true"/>
@@ -11,7 +11,74 @@
   <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory"/>
   <constant name="struts.custom.i18n.resources" value="com.hogemann.stamp.messages"/>
   <constant name="com.opensymphony.xwork2.util.ValueStack.ReportErrorsOnNoProp" value="false"/>
-  
-  <include file="actions.xml"/>
+   -->
+   
+   <package name="fleamarket" extends="struts-default" namespace="">
+		<interceptors>
+
+<!-- 
+			<interceptor name="httpCache"
+				class="cacheInterceptor">
+			</interceptor>
+ -->
+			<interceptor name="checkboxlist"
+				class="com.ideais.utils.web.CheckboxListInterceptor" />
+				
+			<interceptor-stack name="minimalStack">
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="staticParams" />
+			</interceptor-stack>
+
+			<interceptor-stack name="basicStack">
+				<interceptor-ref name="exception" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="checkboxlist">
+					<param name="uncheckedValue">-1</param>
+				</interceptor-ref>
+				<interceptor-ref name="conversionError" />
+				<!-- 
+				<interceptor-ref name="httpCache" />
+				 -->
+			</interceptor-stack>
+
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="exception" />
+				<interceptor-ref name="alias" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="chain" />
+				<interceptor-ref name="fileUpload" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="checkboxlist">
+					<param name="uncheckedValue">-1</param>
+				</interceptor-ref>
+				<interceptor-ref name="staticParams" />
+				
+				<interceptor-ref name="conversionError" />
+				<interceptor-ref name="validation">
+					<param name="excludeMethods">
+						input,back,cancel,browse
+					</param>
+					<param name="validateAnnotatedMethodOnly">
+						true
+					</param>
+				</interceptor-ref>
+				<interceptor-ref name="workflow">
+					<param name="excludeMethods">
+						input,back,cancel,browse
+					</param>
+				</interceptor-ref>
+				 <!-- 
+				<interceptor-ref name="httpCache" />
+				 -->
+			</interceptor-stack>
+		</interceptors>
+
+	</package>
+   
+  <include file="struts/defaultMappings.xml"/>
   
 </struts>

@@ -65,7 +65,7 @@
 					<div class="boxHeader1"><div class="boxHeader2"><div class="boxHeader3"><div class="boxHeader4">
 						<img src="<@utl.staticUrl "/img/webbLogo.gif"/>" alt="Webb" class="logo"/>
 						<div class="line1">
-							<h2 class="title02">Administração de Atributos</h2>
+							<h2 class="title02">POC-MongoDB</h2>
 							<#--
 							<dl class="user">
 								<dt>Usuário:</dt>
@@ -74,18 +74,14 @@
 							-->
 						</div>
 						<div class="line2">
+						<#--
 							<ul class="menu1">
 								<li class="menu drop" id="atributosSubMenu"><a href="#"><span>Atributos</span></a></li>
-								<li class="menu drop" id="metaAtributosSubMenu"><a href="#"><span>MetaAtributos</span></a></li>
-								<li class="menu drop" id="tipoAtributosSubMenu"><a href="#"><span>TipoAtributos</span></a></li>
 							</ul>
-							<#--
-							<ul class="menu2">
-								<li class="logout last"><a href="<@s.url value='/logout'/>"><@s.text name="Sair" /></a></li>
-							</ul>
-							-->
+						-->
 						</div>
 						<div class="line3">
+						<#--
 							<ul class="subMenu atributosSubMenu">
 								<li><a id="atributo_link" href="<@s.url action="atributo/list" />"><span><@s.text name="Atributo" /></span></a></li>	
 								<li><a id="atributoDocumento_link" href="<@s.url action="atributoDocumento/list" />"><span><@s.text name="AtributoDocumento" /></span></a></li>	
@@ -93,19 +89,8 @@
 								<li><a id="configuracaoAtributo_link" href="<@s.url action="configuracaoGrupoAtributo/list" />"><span><@s.text name="ConfiguracaoGrupoAtributo" /></span></a></li>
 								<li><a id="enumerado_link" href="<@s.url action="enumerado/list" />"><span><@s.text name="Enumerado" /></span></a></li>
 								<li><a id="associacoes_link" href="<@s.url action="associacao/list" />"><span><@s.text name="Associações" /></span></a></li>
-							</ul>
-							<ul class="subMenu metaAtributosSubMenu">
-								<li><a id="metaAtributo_link" href="<@s.url action="metaAtributo/list" />"><span><@s.text name="MetaAtributo" /></span></a></li>
-								<li><a id="metaTipoAtributoLivre_link" href="<@s.url action="metaTipoAtributoLivre/list" />"><span><@s.text name="MetaTipoAtributoLivre" /></span></a></li>
-								<li><a id="metaTipoAtributoRange_link" href="<@s.url action="metaTipoAtributoRange/list" />"><span><@s.text name="MetaTipoAtributoRange" /></span></a></li>
-								<li><a id="metaTipoAtributoEnumerado_link" href="<@s.url action="metaTipoAtributoEnumerado/list" />"><span><@s.text name="MetaTipoAtributoEnumerado" /></span></a></li>
-								<li><a id="metaEnumerado_link" href="<@s.url action="metaEnumerado/list" />"><span><@s.text name="MetaEnumerado" /></span></a></li>
 							</ul>	
-							<ul class="subMenu tipoAtributosSubMenu">
-								<li><a id="tipoAtributoLivre_link" href="<@s.url action="tipoAtributoLivre/list" />"><span><@s.text name="TipoAtributoLivre" /></span></a></li>
-								<li><a id="tipoAtributoRange_link" href="<@s.url action="tipoAtributoRange/list" />"><span><@s.text name="TipoAtributoRange" /></span></a></li>
-								<li><a id="tipoAtributoEnumerado_link" href="<@s.url action="tipoAtributoEnumerado/list" />"><span><@s.text name="TipoAtributoEnumerado" /></span></a></li>
-							</ul>									
+						-->	
 						</div>
 					</div></div></div></div>
 				

@@ -9,6 +9,15 @@ import br.com.webb.web.action.AbstractEntityAction;
 
 class ProductAction extends AbstractEntityAction<Product> {
 
+	
+	Product getEntity(){
+		super.entity
+	}
+	
+	void setEntity( Product p ){
+		super.entity = p	
+	}
+	
 	Product newEntity(){
 		new Product()
 	}

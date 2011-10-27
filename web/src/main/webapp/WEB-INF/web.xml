@@ -12,15 +12,50 @@
 	</context-param>
 	
 	<filter>
-		<filter-name>struts2</filter-name>
-		<filter-class>
-			org.apache.struts2.dispatcher.FilterDispatcher
-		</filter-class>
+		<filter-name>struts-prepare</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>strutsPrepareFilter</param-value>
+		</init-param>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
 	</filter>
 	
+	<filter>
+		<filter-name>struts-execute</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>strutsExecuteFilter</param-value>
+		</init-param>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	    
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>org.apache.struts2.sitemesh.FreemarkerPageFilter</filter-class>
+	</filter>
+	
+	
 	<filter-mapping>
-		<filter-name>struts2</filter-name>
+        <filter-name>struts-prepare</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
 		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+	    <filter-name>struts-execute</filter-name>
+	    <url-pattern>/*</url-pattern>
 	</filter-mapping>
 
 	<listener>
