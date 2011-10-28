@@ -36,4 +36,9 @@ public abstract class AbstractEntity implements Serializable, Validatable {
 		return false;
 	}
 	
+	@Override
+	public int hashCode() {
+		return objectId.hashCode();
+	}
+	
 }

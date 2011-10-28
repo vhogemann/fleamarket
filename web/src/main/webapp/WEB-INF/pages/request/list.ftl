@@ -5,6 +5,6 @@
 	buttons=[["Nova Requisição","request/create"]]
 	emptyListMessage="Nenhuma requisição encontrada"
 	type="request"
-	columns=[["Código","id"],["Nome","name"],["Descrição","description"],["Preço Ref.","referencePrice"]]
+	columns=[["Código","id"],["Descrição","description"]]
 	removalConfirmation="Tem certeza?"
 />

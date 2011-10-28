@@ -4,13 +4,13 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
-
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import java.util.Set;
 
 import br.com.webb.model.common.Address;
 import br.com.webb.model.item.RequestItem;
-import br.com.webb.model.order.RequestHistoryItem;
+import br.com.webb.model.order.RequestState;
 import br.com.webb.model.order.RequestStatus;
 
 public class Request extends AbstractEntity {
@@ -23,18 +23,15 @@ public class Request extends AbstractEntity {
 
 	private String description;
 
-	private List<RequestHistoryItem> history;
+	private List<RequestStatus> history;
 
-	@DBRef
-	private List<RequestItem> items;
+	private Set<RequestItem> items;
 
-	@DBRef
 	private Order order;
 
-	@DBRef
 	private List<Quote> quotes;
 
-	private RequestHistoryItem status;
+	private RequestStatus status;
 
 	public Request() { }
 	
@@ -42,7 +39,7 @@ public class Request extends AbstractEntity {
 		this.deliveryAddress = deliveryAddress;
 		this.description = description;
 		this.createdAt = new Date();
-		setStatus(new RequestHistoryItem(RequestStatus.DRAFT, "Nova requisição"));
+		setStatus(new RequestStatus(RequestState.DRAFT, "Nova requisição"));
 		if(!isValid())
 			throw new IllegalStateException("Valid Address and description are required");
 	}
@@ -51,30 +48,42 @@ public class Request extends AbstractEntity {
 		return isNotBlank(description) && deliveryAddress != null && deliveryAddress.isValid();
 	}
 	
+	public void addProduct(Product product, int quantity){
+		if(getStatus().getState().equals(RequestState.DRAFT)){
+			RequestItem item = new RequestItem(product, quantity);
+			getItems().add(item);
+		} else 
+			throw new IllegalStateException("Can't add products to a non-DRAFT request");
+	}
+	
 	public void addQuote(Quote quote){
-		if ( getItems().containsAll(quote.getItems()) &&
-				getItems().size() == quote.getItems().size()){
-			getQuotes().add(quote);
-		} else
-			throw new IllegalArgumentException("Quote must match every item described in the Request");
+		
+		if(status.getState().equals(RequestState.PENDING_QUOTES))
+			if ( getItems().containsAll(quote.getItems()) &&
+					getItems().size() == quote.getItems().size()){
+				getQuotes().add(quote);
+			} else
+				throw new IllegalArgumentException("Quote must match every item described in the Request");
+		else
+			throw new IllegalStateException("Can't add quotes on state: " + getStatus().getState().name());
 	}
 	
 	public void setOrder(Order order) {
 		boolean valid = this.order == null &&
-			status.getStatus().canChangeTo(RequestStatus.ORDERED) &&
+			status.getState().canChangeTo(RequestState.ORDERED) &&
 			items.containsAll(order.getItems());
 		
 		if(valid) {
 			this.order = order;
-			setStatus(new RequestHistoryItem(RequestStatus.ORDERED, "Order placed"));
+			setStatus(new RequestStatus(RequestState.ORDERED, "Order placed"));
 		} else
-			throw new IllegalArgumentException("Order not placed, check Request and Order");
+			throw new IllegalStateException("Order not placed, check Request and Order");
 	}
 	
-	public void setStatus(RequestHistoryItem status) {
+	public void setStatus(RequestStatus status) {
 		if(this.status == null)
 			this.status = status;
-		else if (this.status.getStatus().canChangeTo(status.getStatus())){
+		else if (this.status.getState().canChangeTo(status.getState())){
 			this.status = status;
 			getHistory().add(status);
 		} else
@@ -95,15 +104,15 @@ public class Request extends AbstractEntity {
 		return description;
 	}
 
-	public List<RequestHistoryItem> getHistory() {
+	public List<RequestStatus> getHistory() {
 		if(history == null)
-			history = new ArrayList<RequestHistoryItem>();
+			history = new ArrayList<RequestStatus>();
 		return history;
 	}
 
-	public List<RequestItem> getItems() {
+	public Set<RequestItem> getItems() {
 		if(items == null)
-			items = new ArrayList<RequestItem>();
+			items = new HashSet<RequestItem>();
 		return items;
 	}
 
@@ -117,7 +126,7 @@ public class Request extends AbstractEntity {
 		return quotes;
 	}
 
-	public RequestHistoryItem getStatus() {
+	public RequestStatus getStatus() {
 		return status;
 	}
 
@@ -133,14 +142,13 @@ public class Request extends AbstractEntity {
 		this.description = description;
 	}
 	
-	public void setHistory(List<RequestHistoryItem> history) {
+	public void setHistory(List<RequestStatus> history) {
 		this.history = history;
 	}
 	
-	public void setItems(List<RequestItem> items) {
+	public void setItems(Set<RequestItem> items) {
 		this.items = items;
 	}
-	
 	
 	public void setQuotes(List<Quote> quotes) {
 		this.quotes = quotes;

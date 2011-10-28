@@ -68,7 +68,7 @@ public abstract class AbstractEntityAction <E extends AbstractEntity> extends Ac
 	
 	public String save(){
 		
-		if(entity.isValid()){
+		if(entity != null && entity.isValid()){
 			getRepository().save(entity);
 			return SUCCESS;
 		} 

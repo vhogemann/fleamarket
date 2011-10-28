@@ -2,7 +2,8 @@ package br.com.webb.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -20,7 +21,7 @@ public class Quote implements Validatable {
 	@Transient
 	private BigDecimal price;
 
-	private List<QuoteItem> items;
+	private Set<QuoteItem> items;
 
 	public Quote() { }
 	
@@ -69,11 +70,13 @@ public class Quote implements Validatable {
 		this.price = price;
 	}
 
-	public List<QuoteItem> getItems() {
+	public Set<QuoteItem> getItems() {
+		if(items == null)
+			items = new HashSet<QuoteItem>();
 		return items;
 	}
 
-	public void setItems(List<QuoteItem> items) {
+	public void setItems(Set<QuoteItem> items) {
 		this.items = items;
 	}
 

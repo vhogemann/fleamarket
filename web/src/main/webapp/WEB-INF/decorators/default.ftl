@@ -75,7 +75,8 @@
 						</div>
 						<div class="line2">
 							<ul class="menu1">
-								<li class="menu drop" id="produtosSubMenu"><a href="<@s.url action="product/list" />"><span><@s.text name="Produtos" /></span></a></li>
+								<li class="menu drop" id="productSubMenu"><a href="<@s.url action="product/list" />"><span><@s.text name="Produtos" /></span></a></li>
+								<li class="menu drop" id="requestSubMenu"><a href="<@s.url action="request/list" />"><span><@s.text name="Requisições" /></span></a></li>
 							</ul>
 						
 						</div>

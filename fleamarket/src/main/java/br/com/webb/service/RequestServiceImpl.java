@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.webb.model.Quote;
 import br.com.webb.model.Request;
-import br.com.webb.model.order.RequestStatus;
+import br.com.webb.model.order.RequestState;
 import br.com.webb.repository.RequestRepository;
 
 @Service
@@ -27,7 +27,7 @@ public class RequestServiceImpl implements RequestService {
 		return null;
 	}
 
-	public List<Request> list(RequestStatus status, int offser, int limit) {
+	public List<Request> list(RequestState status, int offser, int limit) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,10 +1,12 @@
 package br.com.webb.repository;
 
+import static junit.framework.Assert.assertEquals;
+
+import org.junit.After;
 import org.junit.Test;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import br.com.webb.model.AbstractEntity;
 
-import static junit.framework.Assert.*;
+import br.com.webb.model.AbstractEntity;
 
 public abstract class AbstractMongoRepositoryTest<E extends AbstractEntity> {
 
@@ -21,6 +23,15 @@ public abstract class AbstractMongoRepositoryTest<E extends AbstractEntity> {
 		E actual = getRepository().findOne(id);
 		
 		assertEquals(expected, actual);
+		
 	}
+	
+	@After
+	public void resetRepository(){
+		getRepository().deleteAll();
+		afterResetHook();
+	}
+	
+	public abstract void afterResetHook();
 	
 }
