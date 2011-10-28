@@ -2,16 +2,17 @@ package br.com.webb.model;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
-import br.com.webb.model.item.QuoteItem;
+import org.springframework.data.annotation.Transient;
+
+import br.com.webb.model.item.Item;
 import br.com.webb.model.order.OrderStatus;
 
-public class Order {
+public class Order extends AbstractEntity {
 	
 	private String id;
 	
-	private Set<QuoteItem> items;
+	private Quote quote;
 	
 	private OrderStatus status;
 	
@@ -23,7 +24,7 @@ public class Order {
 		if(!quote.isValid())
 			throw new IllegalArgumentException("Can't create Order from an invalid Quote");
 		
-		this.items = quote.getItems();
+		this.quote = quote;
 	}
 	
 	public String getId() {
@@ -34,20 +35,16 @@ public class Order {
 		this.id = id;
 	}
 
-	public BigDecimal getTotal() {
+	public BigDecimal getPrice() {
 		BigDecimal total = new BigDecimal(0d);
-		if(items != null && !items.isEmpty())
-			for(QuoteItem item : items)
+		if(getItems() != null && !getItems().isEmpty())
+			for(Item item : getItems())
 				total = total.add(item.getPrice());
 		return total;
 	}
 
-	public Set<QuoteItem> getItems() {
-		return items;
-	}
-
-	public void setItems(Set<QuoteItem> items) {
-		this.items = items;
+	public List<Item> getItems() {
+		return quote.getItems();
 	}
 
 	public OrderStatus getStatus() {
@@ -64,6 +61,14 @@ public class Order {
 
 	public void setHistory(List<OrderStatus> history) {
 		this.history = history;
+	}
+
+	public Quote getQuote() {
+		return quote;
+	}
+
+	public void setQuote(Quote quote) {
+		this.quote = quote;
 	}
 	
 }

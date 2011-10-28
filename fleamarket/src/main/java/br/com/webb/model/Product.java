@@ -3,12 +3,16 @@ package br.com.webb.model;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Document
-public class Product extends AbstractDocument{
+public class Product extends AbstractEntity{
+	
+	@Id
+	private String id;
 
 	private static final long serialVersionUID = 1L;
 
@@ -70,6 +74,14 @@ public class Product extends AbstractDocument{
 
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

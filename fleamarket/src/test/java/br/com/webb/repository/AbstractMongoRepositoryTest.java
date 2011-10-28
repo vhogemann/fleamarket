@@ -6,10 +6,9 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import br.com.webb.model.AbstractDocument;
 import br.com.webb.model.AbstractEntity;
 
-public abstract class AbstractMongoRepositoryTest<E extends AbstractDocument> {
+public abstract class AbstractMongoRepositoryTest<E extends AbstractEntity> {
 
 	public abstract E newEntity();
 	

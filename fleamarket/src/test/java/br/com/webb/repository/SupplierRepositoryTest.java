@@ -15,7 +15,7 @@ import br.com.webb.model.common.Address;
 import br.com.webb.model.common.AddressType;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath*:test-config.xml")
+@ContextConfiguration("classpath*:test-context.xml")
 public class SupplierRepositoryTest extends AbstractMongoRepositoryTest<Supplier> {
 
 	@Autowired

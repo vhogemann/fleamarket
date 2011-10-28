@@ -1,14 +1,18 @@
 package br.com.webb.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import br.com.webb.model.common.Address;
 
 @Document
-public class Supplier extends AbstractDocument {
+public class Supplier extends AbstractEntity {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	private String id;
+	
 	private String name;
 
 	private Address address;
@@ -43,6 +47,14 @@ public class Supplier extends AbstractDocument {
 	public boolean isValid() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

@@ -4,18 +4,21 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+import org.springframework.data.annotation.Id;
 
 import br.com.webb.model.common.Address;
-import br.com.webb.model.item.RequestItem;
+import br.com.webb.model.item.Item;
 import br.com.webb.model.order.RequestState;
 import br.com.webb.model.order.RequestStatus;
 
-public class Request extends AbstractDocument {
+public class Request extends AbstractEntity {
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	private String id;
 
 	private Date createdAt;
 
@@ -25,7 +28,7 @@ public class Request extends AbstractDocument {
 
 	private List<RequestStatus> history;
 
-	private Set<RequestItem> items;
+	private List<Item> items;
 
 	private Order order;
 
@@ -50,7 +53,7 @@ public class Request extends AbstractDocument {
 	
 	public void addProduct(Product product, int quantity){
 		if(getStatus().getState().equals(RequestState.DRAFT)){
-			RequestItem item = new RequestItem(product, quantity);
+			Item item = new Item(product, quantity);
 			getItems().add(item);
 		} else 
 			throw new IllegalStateException("Can't add products to a non-DRAFT request");
@@ -59,19 +62,14 @@ public class Request extends AbstractDocument {
 	public void addQuote(Quote quote){
 		
 		if(status.getState().equals(RequestState.PENDING_QUOTES))
-			if ( getItems().containsAll(quote.getItems()) &&
-					getItems().size() == quote.getItems().size()){
-				getQuotes().add(quote);
-			} else
-				throw new IllegalArgumentException("Quote must match every item described in the Request");
+			getQuotes().add(quote);
 		else
 			throw new IllegalStateException("Can't add quotes on state: " + getStatus().getState().name());
 	}
 	
 	public void setOrder(Order order) {
 		boolean valid = this.order == null &&
-			status.getState().canChangeTo(RequestState.ORDERED) &&
-			items.containsAll(order.getItems());
+			status.getState().canChangeTo(RequestState.ORDERED);
 		
 		if(valid) {
 			this.order = order;
@@ -110,9 +108,9 @@ public class Request extends AbstractDocument {
 		return history;
 	}
 
-	public Set<RequestItem> getItems() {
+	public List<Item> getItems() {
 		if(items == null)
-			items = new HashSet<RequestItem>();
+			items = new ArrayList<Item>();
 		return items;
 	}
 
@@ -146,12 +144,20 @@ public class Request extends AbstractDocument {
 		this.history = history;
 	}
 	
-	public void setItems(Set<RequestItem> items) {
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 	
 	public void setQuotes(List<Quote> quotes) {
 		this.quotes = quotes;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

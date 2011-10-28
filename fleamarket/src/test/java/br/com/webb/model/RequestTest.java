@@ -45,9 +45,9 @@ public class RequestTest {
 		
 		request.setStatus(new RequestStatus(RequestState.PENDING_QUOTES, "aguarndando cotações"));
 		
-		request.setStatus(new RequestStatus(RequestState.PENDING_ORDERS, "aguardando pedidos"));
+		request.setStatus(new RequestStatus(RequestState.PENDING_ORDER, "aguardando pedidos"));
 		
-		request.setStatus(new RequestStatus(RequestState.CLOSED, "fechado"));
+		request.setStatus(new RequestStatus(RequestState.ORDERED, "pedido feito"));
 	}
 	
 	@Test
@@ -104,11 +104,6 @@ public class RequestTest {
 								"20011-000", "Brasil", "RJ",
 								"Rio de Janeiro", AddressType.COMMERCIAL)), 
 							request); 
-		try{
-			quote.setItems(null);
-			request.addQuote(quote);
-			Assert.fail("Quote must match every Request Item");
-		}catch(IllegalArgumentException e){/* OK */}
 	}
 	
 	@Test
@@ -122,7 +117,7 @@ public class RequestTest {
 		
 		request.addQuote(quote);
 		
-		request.setStatus(new RequestStatus(RequestState.PENDING_ORDERS, "aguardando pedidos"));
+		request.setStatus(new RequestStatus(RequestState.PENDING_ORDER, "aguardando pedidos"));
 		
 		request.setOrder(new Order(quote));
 		
@@ -134,7 +129,7 @@ public class RequestTest {
 		Request request = new Request(address,"Teste Unitário");
 		
 		try{
-			request.setStatus(new RequestStatus(RequestState.DENIED, "meh"));
+			request.setStatus(new RequestStatus(RequestState.PENDING_ORDER, "meh"));
 			Assert.fail("Illegal status");			
 		} catch (IllegalArgumentException e){
 			//OK

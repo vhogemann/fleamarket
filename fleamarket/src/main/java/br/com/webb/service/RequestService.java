@@ -1,16 +1,20 @@
 package br.com.webb.service;
 
-import java.util.List;
+import br.com.webb.model.Order;
 
-import br.com.webb.model.Request;
-import br.com.webb.model.order.RequestState;
 
 public interface RequestService {
 	
-	public Request placeRequest(Request request);
+	public void publish(String id, String reason);
 	
-	public List<Request> listAll();
+	public void approve(String id, String reason);
 	
-	public List<Request> list(RequestState status, int offser, int limit);
+	public void cancel(String id, String reason);
+	
+	public void endQuoting(String id, String reason);
+	
+	public Order approveBestQuote(String requestId);
+	
+	public Order approveQuote(String requestId, String quoteId);
 
 }
