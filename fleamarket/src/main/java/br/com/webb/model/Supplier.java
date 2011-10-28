@@ -7,7 +7,6 @@ import br.com.webb.model.common.Address;
 @Document
 public class Supplier extends AbstractEntity {
 	
-	
 	private static final long serialVersionUID = 1L;
 
 	private String name;

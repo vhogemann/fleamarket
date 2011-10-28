@@ -23,7 +23,6 @@ public abstract class AbstractMongoRepositoryTest<E extends AbstractEntity> {
 		E actual = getRepository().findOne(id);
 		
 		assertEquals(expected, actual);
-		
 	}
 	
 	@After

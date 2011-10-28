@@ -1,17 +1,21 @@
 package br.com.webb.repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import br.com.webb.model.Product;
 import br.com.webb.model.Request;
 import br.com.webb.model.common.Address;
 import br.com.webb.model.common.AddressType;
+import br.com.webb.model.order.RequestState;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath*:test-context.xml")
@@ -22,6 +26,19 @@ public class RequestRepositoryTest extends AbstractMongoRepositoryTest<Request> 
 	
 	@Autowired
 	ProductRepository productRepository;
+	
+	@Test
+	public void findByStatusStateTest(){
+		
+		Request request = newEntity();
+
+		repository.save(request);
+		
+		List<Request> list = repository.findByStatusState(RequestState.DRAFT);
+		
+		Assert.notEmpty(list);
+		
+	}
 	
 	@Override
 	public Request newEntity() {
