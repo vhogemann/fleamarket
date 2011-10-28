@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<context:annotation-config/>
+	<context:component-scan base-package="br.com.webb"/>
+	<context:property-placeholder location="classpath*:importer.properties"/>
+
+	<import resource="classpath*:data-context.xml"/>
+	
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${oracle.driver}" />
+		<property name="url" value="${oracle.url}" />
+		<property name="username" value="${oracle.user}" />
+		<property name="password" value="${oracle.pass}" />
+	</bean>
+		
+	<bean id="importer" class="br.com.webb.Importer">
+		<property name="query" >
+			<value>
+			select
+				PRO.*,
+				PRI.*,
+				PRI.IREFITEM as PRI_IREFITEM
+				PRI.IPRICE as PRI_IPRICE,
+				PRI.UOWNERREF as PRI_UOWNERREF,
+				PRI.UREFITEM as PRI_UREFITEM,
+				PRI.IQTYAVAIL as PRI_IQTYAVAIL,
+				PRI.PREFITEM as PRI_PREFITEM, 
+				PRO.IREFITEM as PRO_IREFITEM, 
+				PRO.IPRICE as PRO_IPRICE, 
+				PRO.UOWNERREF as PRO_UOWNERREF, 
+				PRO.UREFITEM as PRO_UREFITEM, 
+				PRO.IQTYAVAIL as PRO_IQTYAVAIL, 
+				PRO.PREFITEM as PRO_PREFITEM 
+			from
+				ECPRODUCTS.PRODUCTS PRO 
+			left outer join ECPRODUCTS.PRICES PRI on 
+				PRI.PREFITEM = PRO.PREFITEM
+			order by PRO.PREFITEM desc
+			</value>
+		</property>
+	</bean>
+	
+</beans>

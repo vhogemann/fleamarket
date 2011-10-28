@@ -1,12 +1,15 @@
 package br.com.webb.repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import br.com.webb.model.Product;
 
@@ -14,9 +17,30 @@ import br.com.webb.model.Product;
 @ContextConfiguration(locations="classpath*:test-context.xml")
 public class ProductRepositoryTest extends AbstractMongoRepositoryTest<Product> {
 
+	
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductRepository repository;
 
+	@Test
+	public void findByNameTest(){
+		
+		repository.save(newEntity());
+		
+		List<Product> list = repository.findByName("name");
+		
+		Assert.notEmpty(list);
+	}
+	
+	@Test
+	public void findByNameLike(){
+		
+		repository.save(newEntity());
+		
+		List<Product> list = repository.findByNameLike("na.*");
+		
+		Assert.notEmpty(list);
+	}
+	
 	@Override
 	public Product newEntity() {
 		return new Product("name","description",new BigDecimal(1.0));
@@ -24,7 +48,7 @@ public class ProductRepositoryTest extends AbstractMongoRepositoryTest<Product> 
 
 	@Override
 	public MongoRepository<Product, String> getRepository() {
-		return productRepository;
+		return repository;
 	}
 
 	@Override
