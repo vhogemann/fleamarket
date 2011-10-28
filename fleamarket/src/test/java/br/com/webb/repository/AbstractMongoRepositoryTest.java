@@ -6,9 +6,10 @@ import org.junit.After;
 import org.junit.Test;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import br.com.webb.model.AbstractDocument;
 import br.com.webb.model.AbstractEntity;
 
-public abstract class AbstractMongoRepositoryTest<E extends AbstractEntity> {
+public abstract class AbstractMongoRepositoryTest<E extends AbstractDocument> {
 
 	public abstract E newEntity();
 	
@@ -20,7 +21,7 @@ public abstract class AbstractMongoRepositoryTest<E extends AbstractEntity> {
 		
 		String id = getRepository().save(expected).getId();
 		
-		E actual = getRepository().findOne(id);
+		AbstractEntity actual = getRepository().findOne(id);
 		
 		assertEquals(expected, actual);
 	}

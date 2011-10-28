@@ -16,4 +16,8 @@ public interface RequestRepository extends MongoRepository<Request, String> {
 	List<Request> findByStatusState(RequestState state);
 	Page<Request> findByStatusState(RequestState state, Pageable pageable);
 	
+	List<Request> findByOrderObjectId(String objectId);
+	
+	List<Request> findByQuoteObjectId(String objectId);
+	
 }

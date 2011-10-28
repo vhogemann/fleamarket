@@ -1,22 +1,13 @@
 package br.com.webb.model;
 
-import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class AbstractEntity implements Serializable, Validatable {
+public class AbstractEntity {
 
-	private static final long serialVersionUID = 1L;
-	
-	private String objectId = UUID.randomUUID().toString();
+	protected String objectId = UUID.randomUUID().toString();
 
-	private String id;
-	
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
+	public AbstractEntity() {
+		super();
 	}
 
 	public String getObjectId() {
@@ -26,19 +17,5 @@ public abstract class AbstractEntity implements Serializable, Validatable {
 	public void setObjectId(String objectId) {
 		this.objectId = objectId;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		
-		if(obj instanceof AbstractEntity)
-			return objectId.equals(((AbstractEntity) obj).getObjectId());
-		
-		return false;
-	}
-	
-	@Override
-	public int hashCode() {
-		return objectId.hashCode();
-	}
-	
+
 }

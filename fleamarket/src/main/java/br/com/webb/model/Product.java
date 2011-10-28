@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Document
-public class Product extends AbstractEntity{
+public class Product extends AbstractDocument{
 
 	private static final long serialVersionUID = 1L;
 

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import br.com.webb.model.AbstractEntity;
+import br.com.webb.model.AbstractDocument;
 import br.com.webb.model.Product;
 import br.com.webb.repository.ProductRepository;
 
@@ -30,7 +30,7 @@ public class ProductConverter extends StrutsTypeConverter {
 	public String convertToString(Map context, Object o) {
 
 		try {
-			return ((AbstractEntity)o).getId();
+			return ((AbstractDocument)o).getId();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

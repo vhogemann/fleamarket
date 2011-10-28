@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import br.com.webb.model.item.QuoteItem;
 import br.com.webb.model.item.RequestItem;
 
-public class Quote implements Validatable {
+public class Quote extends AbstractEntity implements Validatable {
 
 	private Date createdAt;
 

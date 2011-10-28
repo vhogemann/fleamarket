@@ -9,11 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import br.com.webb.model.AbstractDocument;
+
 import com.opensymphony.xwork2.ActionSupport;
 
-import br.com.webb.model.AbstractEntity;
-
-public abstract class AbstractEntityAction <E extends AbstractEntity> extends ActionSupport{
+public abstract class AbstractEntityAction <E extends AbstractDocument> extends ActionSupport{
 
 	private static final long serialVersionUID = 8466293955457016376L;
 	protected static final String FAILURE = "failure";

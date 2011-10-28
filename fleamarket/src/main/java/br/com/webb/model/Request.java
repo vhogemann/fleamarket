@@ -13,7 +13,7 @@ import br.com.webb.model.item.RequestItem;
 import br.com.webb.model.order.RequestState;
 import br.com.webb.model.order.RequestStatus;
 
-public class Request extends AbstractEntity {
+public class Request extends AbstractDocument {
 	
 	private static final long serialVersionUID = 1L;
 

@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import br.com.webb.model.common.Address;
 
 @Document
-public class Supplier extends AbstractEntity {
+public class Supplier extends AbstractDocument {
 	
 	private static final long serialVersionUID = 1L;
 
