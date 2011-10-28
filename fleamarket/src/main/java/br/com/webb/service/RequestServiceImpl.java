@@ -32,4 +32,8 @@ public class RequestServiceImpl implements RequestService {
 		return null;
 	}
 
+	public List<Request> listAll() {
+		return repository.findAll();
+	}
+
 }

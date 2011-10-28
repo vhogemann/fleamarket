@@ -4,9 +4,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import br.com.webb.model.AbstractDocument;
@@ -20,8 +19,7 @@ public abstract class AbstractEntityAction <E extends AbstractDocument> extends 
 	protected static final String SUCCESS = "success";
 
 	protected String entityId;
-	//protected E entity;
-	protected Page<E> page;
+	protected List<E> entities;
 	
 	private int currentPage;
 	private int pageSize = 10;
@@ -49,7 +47,7 @@ public abstract class AbstractEntityAction <E extends AbstractDocument> extends 
 	}
 	
 	public String list(){
-		page = getRepository().findAll(new PageRequest(currentPage, pageSize));
+		entities = getRepository().findAll();
 		return SUCCESS;
 	}
 	
@@ -70,7 +68,7 @@ public abstract class AbstractEntityAction <E extends AbstractDocument> extends 
 	
 	public String save(){
 		
-		if(entity.isValid()){
+		if(entity != null && entity.isValid()){
 			getRepository().save(entity);
 			return SUCCESS;
 		} 
@@ -80,6 +78,27 @@ public abstract class AbstractEntityAction <E extends AbstractDocument> extends 
 		return INPUT;
 		
 	}
+	
+	public String update(){
+		
+		if(entity.isValid()){
+			getRepository().save(entity);
+			return SUCCESS;
+		} 
+		Collection<String> errorMessages = new ArrayList<String>();
+		errorMessages.add("Entity is not Valid!");
+		this.setActionErrors(errorMessages );
+		return INPUT;
+	}
+	
+	public String delete(){
+		
+		getRepository().delete(entity);
+		
+		return SUCCESS;
+	}
+	
+	
 	
 	/**
 	 * This method should return a blank entity
@@ -98,15 +117,6 @@ public abstract class AbstractEntityAction <E extends AbstractDocument> extends 
 		this.entityId = entityId;
 	}
 
-	
-	public Page<E> getPage() {
-		return page;
-	}
-
-
-	public void setPage(Page<E> page) {
-		this.page = page;
-	}
 
 
 	public int getCurrentPage() {
@@ -140,6 +150,14 @@ public abstract class AbstractEntityAction <E extends AbstractDocument> extends 
 
 	public void setStaticURLBase(String staticURLBase) {
 		this.staticURLBase = staticURLBase;
+	}
+
+	public List<E> getEntities() {
+		return entities;
+	}
+
+	public void setEntities(List<E> entities) {
+		this.entities = entities;
 	}
 
 }

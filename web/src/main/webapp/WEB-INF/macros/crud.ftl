@@ -34,7 +34,7 @@
 						</#list>
 					</div>
 				</#if>
-				<#if page.getContent()?has_content>
+				<#if entities?has_content>
 		        	<table class="table1 datatable">
 						<thead>
 							<tr>
@@ -47,7 +47,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<#list page.getContent() as entity>
+							<#list entities as entity>
 								<tr>
 									<#list columns as col>
 										<td>

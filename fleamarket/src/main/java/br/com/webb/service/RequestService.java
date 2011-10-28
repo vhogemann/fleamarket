@@ -9,6 +9,8 @@ public interface RequestService {
 	
 	public Request placeRequest(Request request);
 	
+	public List<Request> listAll();
+	
 	public List<Request> list(RequestState status, int offser, int limit);
 
 }
