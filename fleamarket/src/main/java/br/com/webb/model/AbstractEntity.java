@@ -8,6 +8,8 @@ public abstract class AbstractEntity {
 
 	public abstract String getId();
 	
+	public abstract boolean isValid();
+	
 	public String getObjectId() {
 		return objectId;
 	}

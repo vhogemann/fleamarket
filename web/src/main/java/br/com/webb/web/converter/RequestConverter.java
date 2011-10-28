@@ -8,7 +8,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import br.com.webb.model.AbstractDocument;
+import br.com.webb.model.AbstractEntity;
 import br.com.webb.repository.RequestRepository;
 
 @Component("requestConverter")
@@ -26,7 +26,7 @@ public class RequestConverter  extends StrutsTypeConverter{
 	@Override
 	public String convertToString(Map context, Object o) {
 		try {
-			return ((AbstractDocument)o).getId();
+			return ((AbstractEntity)o).getId();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

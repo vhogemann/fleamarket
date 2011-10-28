@@ -3,8 +3,6 @@ package br.com.webb.model;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.data.annotation.Transient;
-
 import br.com.webb.model.item.Item;
 import br.com.webb.model.order.OrderStatus;
 
@@ -69,6 +67,11 @@ public class Order extends AbstractEntity {
 
 	public void setQuote(Quote quote) {
 		this.quote = quote;
+	}
+
+	@Override
+	public boolean isValid() {
+		return quote.isValid();
 	}
 	
 }

@@ -8,11 +8,11 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import br.com.webb.model.AbstractDocument;
+import br.com.webb.model.AbstractEntity;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public abstract class AbstractEntityAction <E extends AbstractDocument> extends ActionSupport{
+public abstract class AbstractEntityAction <E extends AbstractEntity> extends ActionSupport{
 
 	private static final long serialVersionUID = 8466293955457016376L;
 	protected static final String FAILURE = "failure";
