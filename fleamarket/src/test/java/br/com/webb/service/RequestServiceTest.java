@@ -47,7 +47,7 @@ public class RequestServiceTest {
 		
 		request = requestRepository.findOne(request.getId());
 		
-		Assert.assertEquals(RequestState.WAITING_FOR_APPROVAL, request.getStatus().getState());
+		Assert.assertEquals(RequestState.PENDING_APPROVAL, request.getStatus().getState());
 	}
 	
 	@Test

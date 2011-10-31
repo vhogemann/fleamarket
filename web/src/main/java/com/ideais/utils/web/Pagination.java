@@ -2,8 +2,6 @@ package com.ideais.utils.web;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-
 public class Pagination {
 	private int page;
 
@@ -63,7 +61,6 @@ public class Pagination {
 		return lowLimit;
 	}
 
-	@XmlElement(namespace="http://weshow.com/portal/model")
 	public int getHighLimit() {
 
 		if (page == 0)
@@ -77,7 +74,6 @@ public class Pagination {
 		return highLimit;
 	}
 
-	@XmlElement(namespace="http://weshow.com/portal/model")
 	public int getPageUnchecked() {
 		return page;
 	}

@@ -41,7 +41,7 @@ public class RequestTest {
 		
 		Request request = validRequest();
 		
-		request.setStatus(new RequestStatus(RequestState.WAITING_FOR_APPROVAL,"aguardando aprovação"));
+		request.setStatus(new RequestStatus(RequestState.PENDING_APPROVAL,"aguardando aprovação"));
 		
 		request.setStatus(new RequestStatus(RequestState.PENDING_QUOTES, "aguarndando cotações"));
 		
@@ -65,7 +65,7 @@ public class RequestTest {
 			Assert.fail("Add an invalid product should not be possible");
 		} catch (IllegalArgumentException e) {/* OK */}
 		
-		request.setStatus(new RequestStatus(RequestState.WAITING_FOR_APPROVAL, "Can't add new products from now on"));
+		request.setStatus(new RequestStatus(RequestState.PENDING_APPROVAL, "Can't add new products from now on"));
 		
 		try{
 			product = new Product("Test2", "Description", new BigDecimal(10.0));
@@ -92,7 +92,7 @@ public class RequestTest {
 			Assert.fail("Must change to WAITING_QUOTES first");
 		} catch (IllegalStateException e){/* OK */}
 		
-		request.setStatus(new RequestStatus(RequestState.WAITING_FOR_APPROVAL,""));
+		request.setStatus(new RequestStatus(RequestState.PENDING_APPROVAL,""));
 		request.setStatus(new RequestStatus(RequestState.PENDING_QUOTES,""));
 		
 		request.addQuote(quote);
@@ -112,7 +112,7 @@ public class RequestTest {
 		Request request = validRequest();
 		Quote quote = validQuote(request);
 		
-		request.setStatus(new RequestStatus(RequestState.WAITING_FOR_APPROVAL,""));
+		request.setStatus(new RequestStatus(RequestState.PENDING_APPROVAL,""));
 		request.setStatus(new RequestStatus(RequestState.PENDING_QUOTES,""));
 		
 		request.addQuote(quote);

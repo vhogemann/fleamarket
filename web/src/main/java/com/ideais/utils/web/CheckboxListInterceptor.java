@@ -25,7 +25,7 @@ public class CheckboxListInterceptor implements Interceptor {
 
     @SuppressWarnings("unchecked")
 	public String intercept(ActionInvocation ai) throws Exception {
-        Map parameters = ai.getInvocationContext().getParameters();
+		Map parameters = ai.getInvocationContext().getParameters();
         Map<String, String> newParams = new HashMap<String, String>();
         Set<String> keys = parameters.keySet();
         for (Iterator<String> iterator = keys.iterator(); iterator.hasNext();) {

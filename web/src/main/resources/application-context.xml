@@ -71,6 +71,6 @@
 	
 	<bean id="productAction" class="br.com.webb.web.action.ProductAction" parent="abstractAction"/>
 	<bean id="requestAction" class="br.com.webb.web.action.RequestAction" parent="abstractAction"/>
-	<bean id="requestServiceAction" class="br.com.webb.web.action.RequestServiceAction" parent="abstractAction"/>
+	<bean id="statusAction" class="br.com.webb.web.action.RequestServiceAction" parent="abstractAction"/>
 	
 </beans>

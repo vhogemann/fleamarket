@@ -17,7 +17,7 @@ public class Address implements Validatable {
 	private AddressType type;
 	
 	public Address() {
-		// TODO Auto-generated constructor stub
+		type = AddressType.COMMERCIAL;
 	}
 	
 	public Address(

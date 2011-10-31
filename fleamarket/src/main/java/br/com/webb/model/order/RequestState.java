@@ -8,8 +8,8 @@ public enum RequestState {
 	ORDERED(),
 	PENDING_ORDER(ORDERED),
 	PENDING_QUOTES(PENDING_ORDER,CANCELED),
-	WAITING_FOR_APPROVAL( PENDING_QUOTES, CANCELED),
-	DRAFT( WAITING_FOR_APPROVAL, CANCELED );
+	PENDING_APPROVAL( PENDING_QUOTES, CANCELED),
+	DRAFT( PENDING_APPROVAL, CANCELED );
 	
 	private List<RequestState> valid;
 	
@@ -21,4 +21,7 @@ public enum RequestState {
 		return valid.contains(status);
 	}
 	
+	public List<RequestState> getValid(){
+		return valid;
+	}
 }

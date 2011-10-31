@@ -14,9 +14,9 @@ import br.com.webb.model.order.RequestState;
 import br.com.webb.model.order.RequestStatus;
 
 public class Request extends AbstractEntity {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String id;
 
@@ -36,60 +36,78 @@ public class Request extends AbstractEntity {
 
 	private RequestStatus status;
 
-	public Request() { }
-	
+	public Request() {
+		createdAt = new Date();
+		deliveryAddress = new Address();
+		setStatus(new RequestStatus(RequestState.DRAFT, "Nova requisição"));
+	}
+
 	public Request(Address deliveryAddress, String description) {
 		this.deliveryAddress = deliveryAddress;
 		this.description = description;
 		this.createdAt = new Date();
 		setStatus(new RequestStatus(RequestState.DRAFT, "Nova requisição"));
-		if(!isValid())
-			throw new IllegalStateException("Valid Address and description are required");
+		if (!isValid())
+			throw new IllegalStateException(
+					"Valid Address and description are required");
 	}
 
 	public boolean isValid() {
-		return isNotBlank(description) && deliveryAddress != null && deliveryAddress.isValid();
+		return isNotBlank(description) && deliveryAddress != null
+				&& deliveryAddress.isValid();
 	}
-	
-	public void addProduct(Product product, int quantity){
-		if(getStatus().getState().equals(RequestState.DRAFT)){
-			Item item = new Item(product, quantity);
-			getItems().add(item);
-		} else 
-			throw new IllegalStateException("Can't add products to a non-DRAFT request");
-	}
-	
-	public void addQuote(Quote quote){
+
+	public void addProduct(Product product, int quantity) {
 		
-		if(status.getState().equals(RequestState.PENDING_QUOTES))
+		quantity = quantity == 0 ? 1 : quantity;
+		
+		if (getStatus().getState().equals(RequestState.DRAFT)) {
+			Item item = new Item(product, quantity);
+			
+			if(getItems().contains(item)){
+				Item oldItem = getItems().get(getItems().indexOf(item));
+				oldItem.setQuantity(oldItem.getQuantity() + 1);
+			} else
+				getItems().add(item);
+		} else
+			throw new IllegalStateException(
+					"Can't add products to a non-DRAFT request");
+	}
+
+	public void addQuote(Quote quote) {
+
+		if (status.getState().equals(RequestState.PENDING_QUOTES))
 			getQuotes().add(quote);
 		else
-			throw new IllegalStateException("Can't add quotes on state: " + getStatus().getState().name());
+			throw new IllegalStateException("Can't add quotes on state: "
+					+ getStatus().getState().name());
 	}
-	
+
 	public void setOrder(Order order) {
-		boolean valid = this.order == null &&
-			status.getState().canChangeTo(RequestState.ORDERED);
-		
-		if(valid) {
+		boolean valid = this.order == null
+				&& status.getState().canChangeTo(RequestState.ORDERED);
+
+		if (valid) {
 			this.order = order;
 			setStatus(new RequestStatus(RequestState.ORDERED, "Order placed"));
 		} else
-			throw new IllegalStateException("Order not placed, check Request and Order");
+			throw new IllegalStateException(
+					"Order not placed, check Request and Order");
 	}
-	
+
 	public void setStatus(RequestStatus status) {
-		if(this.status == null)
+		if (this.status == null) {
 			this.status = status;
-		else if (this.status.getState().canChangeTo(status.getState())){
+			getHistory().add(status);
+		} else if (this.status.getState().canChangeTo(status.getState())) {
 			this.status = status;
 			getHistory().add(status);
 		} else
 			throw new IllegalArgumentException("Invalid Status change");
 	}
-	
+
 	// G&S -----------------------------------
-	
+
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -103,13 +121,13 @@ public class Request extends AbstractEntity {
 	}
 
 	public List<RequestStatus> getHistory() {
-		if(history == null)
+		if (history == null)
 			history = new ArrayList<RequestStatus>();
 		return history;
 	}
 
 	public List<Item> getItems() {
-		if(items == null)
+		if (items == null)
 			items = new ArrayList<Item>();
 		return items;
 	}
@@ -119,7 +137,7 @@ public class Request extends AbstractEntity {
 	}
 
 	public List<Quote> getQuotes() {
-		if(quotes == null)
+		if (quotes == null)
 			quotes = new ArrayList<Quote>();
 		return quotes;
 	}
@@ -131,23 +149,23 @@ public class Request extends AbstractEntity {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	
+
 	public void setDeliveryAddress(Address deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public void setHistory(List<RequestStatus> history) {
 		this.history = history;
 	}
-	
+
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
-	
+
 	public void setQuotes(List<Quote> quotes) {
 		this.quotes = quotes;
 	}

@@ -9,6 +9,8 @@ import br.com.webb.repository.ProductRepository
 import br.com.webb.web.action.AbstractEntityAction;
 
 class ProductAction extends AbstractEntityAction<Product> {
+	
+	String requestId
 
 	@Autowired
 	ProductRepository repository

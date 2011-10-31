@@ -19,7 +19,7 @@ public class RequestServiceImpl implements RequestService {
 	private RequestRepository repository;
 
 	public void publish(String id, String reason) {
-		changeStatus(id, reason, RequestState.WAITING_FOR_APPROVAL);
+		changeStatus(id, reason, RequestState.PENDING_APPROVAL);
 	}
 
 	public void approve(String id, String reason) {
@@ -36,6 +36,10 @@ public class RequestServiceImpl implements RequestService {
 
 	public Order approveBestQuote(String requestId) {
 		Request request = repository.findOne(requestId);
+		if(request == null)
+			throw new IllegalArgumentException("Id not found on persistence");
+		if(request.getQuotes() == null || request.getQuotes().isEmpty())
+			throw new IllegalStateException("No quotes for this request");
 		Collections.sort(request.getQuotes());
 		Quote quote = request.getQuotes().get(0);
 		Order order = new Order(quote);

@@ -4,7 +4,6 @@
 
 	<package name="default" extends="struts-default" namespace="">
 		
-
 		<action name="*" class="baseAction">
 			<result type="freemarker">/WEB-INF/pages/{1}.ftl</result>
 		</action>
@@ -42,7 +41,7 @@
 				<param name="message">${message}</param>				
 			</result>
 		</action>
-
+		
 		<action name="ajax/*/*" method="{2}" class="{1}Action">
 			<result type="freemarker">
 				/WEB-INF/pages/{1}/{2}.ftl
@@ -67,11 +66,33 @@
 				/WEB-INF/pages/{1}/{3}.ftl
 			</result>
 		</action>
-
+		
+		<action name="product/list/*" method="list" class="productAction">
+			<param name="requestId">{1}</param>
+			<result type="freemarker">
+				/WEB-INF/pages/product/listToAdd.ftl
+			</result>
+		</action>
+		
+		<action name="status/*/*" method="{2}" class="statusAction">
+			<param name="entity">{1}</param>
+			<result type="redirect">
+				<param name="location">/request/{1}/show</param>
+			</result>
+		</action>
+		
 		<action name="*/*/*" method="{3}" class="{1}Action">
 			<param name="entity">{2}</param>
 			<result type="freemarker">
 				/WEB-INF/pages/{1}/{3}.ftl
+			</result>
+		</action>
+		
+		<action name="request/*/add/*" method="add" class="requestAction">
+			<param name="entity">{1}</param>
+			<param name="prodId">{2}</param>
+			<result type="redirect">
+				<param name="location">/request/{1}/show</param>
 			</result>
 		</action>
 	</package>

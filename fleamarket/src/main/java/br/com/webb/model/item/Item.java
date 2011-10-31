@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import br.com.webb.model.Product;
 
-public class Item {
+public class Item{
 	
 	@DBRef
 	private Product product;
@@ -48,6 +48,25 @@ public class Item {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Item){
+			Item item = (Item) obj;
+			if(item.isValid())
+				return product.equals(item.getProduct());
+		}
+		return super.equals(obj);
+	}
+	
+	@Override
+	public int hashCode() {
+		return product.hashCode();
+	}
+
+	public boolean isValid() {
+		return this.product != null;
 	}
 	
 }
