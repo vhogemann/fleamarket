@@ -107,7 +107,7 @@ public abstract class AbstractEntityAction <E extends AbstractEntity> extends Ac
 	 * 
 	 * @return
 	 */
-	protected abstract E newEntity();
+	public abstract E newEntity();
 	
 	// G&S ----------------- 
 	

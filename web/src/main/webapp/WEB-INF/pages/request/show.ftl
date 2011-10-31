@@ -23,6 +23,9 @@
 			</a>
 			</#if>
 			<#if entity.status.state == "PENDING_QUOTES">
+			<a class="button1" href="<@s.url action="request/${entity.id}/newQuote"/>">
+				<span><@s.text name="Nova Cotação"/></span>
+			</a>
 			<a class="button1" href="<@s.url action="status/${entity.id}/endQuoting"/>">
 				<span><@s.text name="Encerrar período de Cotação"/></span>
 			</a>

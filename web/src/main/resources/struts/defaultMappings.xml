@@ -7,7 +7,7 @@
 		<action name="*" class="baseAction">
 			<result type="freemarker">/WEB-INF/pages/{1}.ftl</result>
 		</action>
-
+		
 		<action name="*/save" method="save" class="{1}Action">
 			<result type="redirectAction">
 				<param name="namespace">/{1}</param>
@@ -71,6 +71,13 @@
 			<param name="requestId">{1}</param>
 			<result type="freemarker">
 				/WEB-INF/pages/product/listToAdd.ftl
+			</result>
+		</action>
+		
+		<action name="request/*/quote" method="quote" class="statusAction">
+			<param name="entity">{1}</param>
+			<result type="redirect">
+				<param name="location">/request/{1}/show</param>
 			</result>
 		</action>
 		

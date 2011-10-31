@@ -1,9 +1,6 @@
 <#import "/WEB-INF/macros/crud.ftl" as crud>
 
 <#macro localIconsRenderer type entity removalConfirmation>
-	<@crud.actionIcon icon="folder-open" alt="AdicionarProdutos">
-		<@s.url action="product/list/${entity.id}"/>
-	</@crud.actionIcon>
 	<@crud.actionIcon icon="icoPreview" alt="Exibir Requisição">
 		<@s.url action="request/${entity.id}/show"/>
 	</@crud.actionIcon>
