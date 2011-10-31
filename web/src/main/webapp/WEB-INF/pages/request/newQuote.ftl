@@ -9,22 +9,22 @@
 		<@s.form id="request_quote" action="request/${entity.id}/quote">
 			<h1 class="formTitle">Nova Cotação</h1>
 	     	<@s.select 
-				name="entity.supplier" 
+				name="quote.supplier" 
 				list="suppliers" 
 				label="Fornecedor" 
-				value="name"
-				key="id" />
+				listValue="name"
+				listKey="id" />
 			
 			<#if quote.items?has_content>
 			<#list quote.items as item >
-				<@s.hidden name="quote.items[${item_index}].product}" value="${item.product}"/>
-				<@s.hidden name="quote.items[${item_index}].quantity}" value="${item.quantity}"/>
+				<@s.hidden name="quote.items[${item_index}].product" value="${item.product.id}"/>
+				<@s.hidden name="quote.items[${item_index}].quantity" value="${item.quantity}"/>
 			</#list>
 			<table>
 				<tbody>
 				<#list quote.items as item >
 					<tr>
-						<td>${item.product.name}</td>${item.quantity}<td><@s.textfield name="entity.item[item_index].price" value="${item.price}"/></td>
+						<td>${item.product.name}</td>${item.quantity}<td><@s.textfield name="quote.items[${item_index}].price" value="${item.price}"/></td>
 					</tr>
 				</#list>
 				</tbody>

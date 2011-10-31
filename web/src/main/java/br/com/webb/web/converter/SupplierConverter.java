@@ -13,7 +13,6 @@ import br.com.webb.model.Supplier;
 import br.com.webb.repository.SupplierRepository;
 
 @Component("supplierConverter")
-@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class SupplierConverter extends StrutsTypeConverter {
 	
 	@Autowired

@@ -2,6 +2,7 @@ package br.com.webb.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import br.com.webb.model.common.Address;
 
@@ -45,8 +46,7 @@ public class Supplier extends AbstractEntity {
 	}
 
 	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
+		return isNotBlank(name) && address != null && address.isValid();
 	}
 
 	public String getId() {

@@ -54,6 +54,20 @@
 				</tr>
 			</tbody>
 		</table>
+		<#if entity.quote?exists>
+		<table class="table1">
+			<thead>
+				<tr>
+					<th>Fornecedor da Cotação</th><th>Preço</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>${entity.quote.supplier.name}</td> <td>${entity.quote.price}</td>
+				</tr>
+			</tbody>
+		</table>
+		</#if>
 		<#if entity.history?has_content>
 		<table class="table1">
 			<thead>
@@ -81,6 +95,22 @@
 				<#list entity.items as item>
 				<tr>
 					<td>${item.product.name}</td> <td>${item.quantity}</td> <td>${item.price}</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+		</#if>
+		<#if entity.quotes?has_content>
+		<table class="table1">
+			<thead>
+				<tr>
+					<th>Fornecedor da Contação</th><th>Preço</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list entity.quotes as quote>
+				<tr>
+					<td>${quote.supplier.name}</td> <td>${quote.price}</td>
 				</tr>
 				</#list>
 			</tbody>

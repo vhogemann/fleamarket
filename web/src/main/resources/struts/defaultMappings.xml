@@ -74,7 +74,7 @@
 			</result>
 		</action>
 		
-		<action name="request/*/quote" method="quote" class="statusAction">
+		<action name="request/*/quote" method="quote" class="requestAction">
 			<param name="entity">{1}</param>
 			<result type="redirect">
 				<param name="location">/request/{1}/show</param>

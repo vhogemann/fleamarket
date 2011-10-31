@@ -49,6 +49,10 @@ public class Item{
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+	
+	public void setPrice(String price){
+		this.price = new BigDecimal(price);
+	}
 
 	@Override
 	public boolean equals(Object obj) {

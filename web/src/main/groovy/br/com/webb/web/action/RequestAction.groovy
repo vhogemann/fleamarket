@@ -40,6 +40,7 @@ class RequestAction extends AbstractEntityAction<Request> {
 	def quote(){
 		Request request = getEntity();
 		request.addQuote(quote);
+		repository.save(request);
 		return SUCCESS
 	}
 	
@@ -59,11 +60,11 @@ class RequestAction extends AbstractEntityAction<Request> {
 		return SUCCESS
 	}
 	
-	public Request getEntity(){
+	Request getEntity(){
 		return super.entity
 	}
 	
-	void setEntity( Request p ){
+	def setEntity( Request p ){
 		super.entity = p
 	}
 	
