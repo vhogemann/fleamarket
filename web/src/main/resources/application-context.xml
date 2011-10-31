@@ -65,15 +65,12 @@
 		</property>
 	</bean>
 	
-	<lang:groovy id="productAction" script-source="classpath:groovy/ProductAction.groovy" scope="prototype">
-		<lang:property name="repository" ref="productRepository"/>
-		<lang:property name="staticURLBase" value="${staticURLBase}"></lang:property>
-	</lang:groovy>
+	<bean id="abstractAction" abstract="true">
+		<property name="staticURLBase" value="${staticURLBase}" />
+	</bean>
 	
-	<lang:groovy id="requestAction" script-source="classpath:groovy/RequestAction.groovy" scope="prototype">
-		<lang:property name="repository" ref="requestRepository"/>
-		<lang:property name="staticURLBase" value="${staticURLBase}"></lang:property>
-	</lang:groovy>
-	
+	<bean id="productAction" class="br.com.webb.web.action.ProductAction" parent="abstractAction"/>
+	<bean id="requestAction" class="br.com.webb.web.action.RequestAction" parent="abstractAction"/>
+	<bean id="requestServiceAction" class="br.com.webb.web.action.RequestServiceAction" parent="abstractAction"/>
 	
 </beans>

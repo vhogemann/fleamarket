@@ -24,8 +24,6 @@ public abstract class AbstractEntityAction <E extends AbstractEntity> extends Ac
 	private int currentPage;
 	private int pageSize = 10;
 		
-	private MongoRepository<E, String> repository;
-	
 	private String staticURLBase;
 	
 	protected E entity;
@@ -136,13 +134,7 @@ public abstract class AbstractEntityAction <E extends AbstractEntity> extends Ac
 		this.pageSize = pageSize;
 	}
 
-	public MongoRepository<E, String> getRepository() {
-		return repository;
-	}
-
-	public void setRepository(MongoRepository<E, String> repository) {
-		this.repository = repository;
-	}
+	public abstract MongoRepository<E, String> getRepository();
 
 	public String getStaticURLBase() {
 		return staticURLBase;
