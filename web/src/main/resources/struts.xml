@@ -22,7 +22,7 @@
 			</interceptor>
  -->
 			<interceptor name="checkboxlist"
-				class="com.ideais.utils.web.CheckboxListInterceptor" />
+				class="br.com.ideais.utils.web.CheckboxListInterceptor" />
 				
 			<interceptor-stack name="minimalStack">
 				<interceptor-ref name="servletConfig" />

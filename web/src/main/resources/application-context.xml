@@ -11,25 +11,25 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<context:annotation-config/>
-	<context:component-scan base-package="br.com.webb"/>
+	<context:component-scan base-package="br.com.ideais"/>
 	
 	<context:property-placeholder location="classpath*:fleamarket.properties"/>
 	
 	<import resource="classpath*:data-context.xml"/>
 	
 	<bean name="strutsPrepareFilter"
-		class="com.ideais.utils.web.URIBasedSwitchFilter">
+		class="br.com.ideais.utils.web.URIBasedSwitchFilter">
 		<property name="exclusions">
 			<list>
-				<bean class="com.ideais.utils.PatternFactoryBean">
+				<bean class="br.com.ideais.utils.PatternFactoryBean">
 					<property name="regex"
 						value="^(/fleamarket-web)?/service/.*$" />
 				</bean>
-				<bean class="com.ideais.utils.PatternFactoryBean">
+				<bean class="br.com.ideais.utils.PatternFactoryBean">
 					<property name="regex"
 						value="^(/fleamarket-web)?/static/.*$" />
 				</bean>
-				<bean class="com.ideais.utils.PatternFactoryBean">
+				<bean class="br.com.ideais.utils.PatternFactoryBean">
 					<property name="regex"
 						value="^(/fleamarket-web)?/favicon.ico$" />
 				</bean>
@@ -42,18 +42,18 @@
 	</bean>
 	
 	<bean name="strutsExecuteFilter"
-		class="com.ideais.utils.web.URIBasedSwitchFilter">
+		class="br.com.ideais.utils.web.URIBasedSwitchFilter">
 		<property name="exclusions">
 			<list>
-				<bean class="com.ideais.utils.PatternFactoryBean">
+				<bean class="br.com.ideais.utils.PatternFactoryBean">
 					<property name="regex"
 						value="^(/fleamarket-web)?/service/.*$" />
 				</bean>
-				<bean class="com.ideais.utils.PatternFactoryBean">
+				<bean class="br.com.ideais.utils.PatternFactoryBean">
 					<property name="regex"
 						value="^(/fleamarket-web)?/static/.*$" />
 				</bean>
-				<bean class="com.ideais.utils.PatternFactoryBean">
+				<bean class="br.com.ideais.utils.PatternFactoryBean">
 					<property name="regex"
 						value="^(/fleamarket-web)?/favicon.ico$" />
 				</bean>
@@ -69,8 +69,8 @@
 		<property name="staticURLBase" value="${staticURLBase}" />
 	</bean>
 	
-	<bean id="productAction" class="br.com.webb.web.action.ProductAction" parent="abstractAction"/>
-	<bean id="requestAction" class="br.com.webb.web.action.RequestAction" parent="abstractAction"/>
-	<bean id="statusAction" class="br.com.webb.web.action.RequestServiceAction" parent="abstractAction"/>
-	<bean id="supplierAction" class="br.com.webb.web.action.SupplierAction" parent="abstractAction"/>
+	<bean id="productAction" class="br.com.ideais.web.action.ProductAction" parent="abstractAction"/>
+	<bean id="requestAction" class="br.com.ideais.web.action.RequestAction" parent="abstractAction"/>
+	<bean id="statusAction" class="br.com.ideais.web.action.RequestServiceAction" parent="abstractAction"/>
+	<bean id="supplierAction" class="br.com.ideais.web.action.SupplierAction" parent="abstractAction"/>
 </beans>

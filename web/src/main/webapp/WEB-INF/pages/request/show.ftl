@@ -54,16 +54,16 @@
 				</tr>
 			</tbody>
 		</table>
-		<#if entity.quote?exists>
+		<#if entity.order?exists>
 		<table class="table1">
 			<thead>
 				<tr>
-					<th>Fornecedor da Cotação</th><th>Preço</th>
+					<th>Fornecedor do Pedido</th><th>Valor Total</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>${entity.quote.supplier.name}</td> <td>${entity.quote.price}</td>
+					<td>${entity.order.quote.supplier.name}</td> <td>${entity.order.quote.price}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -104,7 +104,7 @@
 		<table class="table1">
 			<thead>
 				<tr>
-					<th>Fornecedor da Contação</th><th>Preço</th>
+					<th>Fornecedor da Cotação</th><th>Preço</th>
 				</tr>
 			</thead>
 			<tbody>
